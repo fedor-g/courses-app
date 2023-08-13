@@ -6,9 +6,13 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "moment": "^2.29.4",
+    "moment-duration-format": "^2.3.2",
+    "node-sass": "9.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "sass": "^1.65.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -20,7 +24,7 @@
     "eslint:fix": "eslint --fix --ext .ts --ext .tsx src",
     "test:nowatch": "react-scripts test --watchAll=false",
     "prepare": "husky install",
-    "prepublish": "npm run eslint:fix"  
+    "prepublish": "npm run eslint:fix"
   },
   "eslintConfig": {
     "extends": [
@@ -42,6 +46,7 @@
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.2.0",
+    "@types/moment-duration-format": "^2.2.3",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "eslint": "^8.46.0",
     "eslint-config-prettier": "^9.0.0",
