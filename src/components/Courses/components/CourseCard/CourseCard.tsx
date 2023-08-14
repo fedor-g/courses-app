@@ -4,7 +4,7 @@ import styles from './coursecard.module.scss';
 import moment from 'moment';
 import 'moment-duration-format';
 
-function authCut(authors: string) {
+function shortenAuthors(authors: string) {
 	return (
 		<>{authors.length > 18 ? authors.substring(0, 18) + '...' : authors}</>
 	);
@@ -16,7 +16,7 @@ export const CourseCard = (props) => {
 			<p className={styles.title}> {props.title} </p>
 			<p className={styles.description}> {props.description} </p>
 			<p className={styles.authors}>
-				<b>Authors:</b> {authCut(props.authors.join(', ').toString())}
+				<b>Authors:</b> {shortenAuthors(props.authors.join(', ').toString())}
 			</p>
 			<p className={styles.duration}>
 				<b>Duration: </b>

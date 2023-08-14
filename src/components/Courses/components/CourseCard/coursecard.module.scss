@@ -10,18 +10,19 @@
 }
 
 .title {
+    position: absolute;
     margin: 10px;
     font-weight: bold;
 }
 
 .description {
     position: relative;
+    top: 30px;
     margin: 10px;
     width: 70%;
 }
 
 .authors {
-    width: auto;
     position: absolute;
     top: 30px;
     left: 80%;
@@ -29,21 +30,19 @@
 }
 
 .duration {
-    position: absolute; 
+    position: relative; 
     left: 80%;
-    margin: 10px;
-    top: 50px;
+    margin-left: 10px;
 }
 
 .creationDate {
-    position: absolute;
-    top: 70px;
+    position: relative;
     left: 80%;
-    margin: 10px;
+    margin-left: 10px;
 }
 
 .button {
-    position: absolute;
+    position: relative;
     left: 80%;
-    top: 130px;
+    margin-left: 10px;
 }

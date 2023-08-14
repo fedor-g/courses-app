@@ -18,7 +18,7 @@ interface Author {
 	name: string;
 }
 
-function shortenAuthors(id: Array<string>, mockedAuthorsList) {
+function defineAuthors(id: Array<string>, mockedAuthorsList) {
 	for (let i = 0; i < id.length; i++) {
 		mockedAuthorsList.forEach((au) => {
 			if (id[i] === au.id) {
@@ -37,7 +37,7 @@ function checkCourses(
 	const list = mockedCoursesList.length > 0;
 	if (list) {
 		return mockedCoursesList.map((e) => {
-			e.authors = shortenAuthors(e.authors, mockedAuthorsList);
+			e.authors = defineAuthors(e.authors, mockedAuthorsList);
 			e.showCourse = toggleInfo;
 			return <CourseCard {...e} />;
 		});

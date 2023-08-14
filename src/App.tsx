@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Header from './components/Header/Header';
 import { Courses } from './components/Courses/Courses';
 import { mockedAuthorsList, mockedCoursesList } from 'src/constants';
+import styles from './app.scss';
+import { CourseInfo } from './components/CourseInfo/CourseInfo';
 
 function App() {
 	const [info, setInfo] = useState(true);
@@ -11,7 +13,7 @@ function App() {
 	}
 
 	return (
-		<div>
+		<div className={styles.main}>
 			<Header />
 			{info ? (
 				<Courses
@@ -20,7 +22,7 @@ function App() {
 					toggleInfo={toggleInfo}
 				/>
 			) : (
-				<></>
+				<CourseInfo />
 			)}
 		</div>
 	);

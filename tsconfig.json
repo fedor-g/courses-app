@@ -6,7 +6,6 @@
         "ES2021",
         "dom"
       ],
-      "baseUrl": ".",
-      "include":["."]
+      "baseUrl": "."
     },
   }
