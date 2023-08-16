@@ -1,9 +1,16 @@
-import React from 'react';
-import styles from './button.module.scss';
+import React, { FC } from 'react';
 
-export const Button = (props) => {
+interface Props
+	extends React.DetailedHTMLProps<
+		React.ButtonHTMLAttributes<HTMLButtonElement>,
+		HTMLButtonElement
+	> {
+	buttonText: string;
+}
+
+export const Button: FC<Props> = (props) => {
 	return (
-		<button className={styles.button} onClick={props.function}>
+		<button className={props.className} onClick={props.onClick}>
 			{props.buttonText}
 		</button>
 	);
