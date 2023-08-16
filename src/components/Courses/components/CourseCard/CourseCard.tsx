@@ -19,24 +19,24 @@ function shortenAuthors(authors: string) {
 export const CourseCard = (props) => {
 	return (
 		<div className={styles.coursecard}>
-			<p className={styles.title}> {props.e.title} </p>
-			<p className={styles.description}> {props.e.description} </p>
+			<p className={styles.title}> {props.title} </p>
+			<p className={styles.description}> {props.description} </p>
 			<p className={styles.authors}>
-				<b>Authors:</b> {shortenAuthors(props.e.authors.join(', ').toString())}
+				<b>Authors:</b> {shortenAuthors(props.authors.join(', ').toString())}
 			</p>
 			<p className={styles.duration}>
 				<b>Duration: </b>
-				{moment.duration(props.e.duration, 'minutes').format('HH:mm')} hours
+				{moment.duration(props.duration, 'minutes').format('HH:mm')} hours
 			</p>
 			<p className={styles.creationDate}>
 				<b>Created: </b>
-				{moment(props.e.creationDate, 'DD-MM-YYYY')
+				{moment(props.creationDate, 'DD-MM-YYYY')
 					.format('DD.MM.YYYY')
 					.toLocaleString()}
 			</p>
 			<Button
 				buttonText='SHOW COURSE'
-				onClick={props.toggleInfo('id')}
+				onClick={() => props.toggleInfo(props.id)}
 				className={styles.button}
 			/>
 		</div>

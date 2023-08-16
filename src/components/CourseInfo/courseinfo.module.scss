@@ -1,7 +1,19 @@
+.info {
+    position: relative;
+    border: double;
+    border-width: thin;
+    box-shadow: 0px 2px 2px;
+    margin: 10px;
+    margin-top: 100px;
+    height: 300px;
+    border-left-style: solid;
+    border-left-width: 10px;
+}
+
 .title {
     position: relative;
-    text-align: center;
-    margin-top: 20%;
+    margin-top: -30px;
+    text-align: left;
     font-weight: bold;
     font-size: large;
 }
@@ -9,4 +21,12 @@
 .button {
     position: relative;
     text-align: center;
+    width: 140px;
+    height: 40px;
+    border-radius: 8px;
+    border-width: 0;
+    color: #333333;
+    background-color: rgba(51, 51, 51, 0.05);
+    cursor: pointer;
+    font-size: 14px;
 }

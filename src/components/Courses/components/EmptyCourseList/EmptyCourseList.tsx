@@ -9,9 +9,7 @@ export const EmptyCourseList = () => {
 			<h1 className={styles.help}>
 				Please use "Add New Course" button to add your first course
 			</h1>
-			<div className={styles.button}>
-				<Button buttonText='Add New Course' />
-			</div>
+			<Button buttonText='Add New Course' className={styles.button} />
 		</div>
 	);
 };

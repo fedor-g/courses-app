@@ -6,23 +6,23 @@ import styles from './app.scss';
 import { CourseInfo } from './components/CourseInfo/CourseInfo';
 
 function App() {
-	const [info, setInfo] = useState(true);
+	const [info, setInfo] = useState('');
 
-	function toggleInfo(courseId: string) {
-		setInfo((prev) => !prev);
+	function toggleInfo(value: string) {
+		setInfo(value);
 	}
 
 	return (
 		<div className={styles.main}>
 			<Header />
 			{info ? (
+				<CourseInfo id={info} toggleInfo={toggleInfo} />
+			) : (
 				<Courses
 					authList={mockedAuthorsList}
 					coursesList={mockedCoursesList}
 					toggleInfo={toggleInfo}
 				/>
-			) : (
-				<CourseInfo />
 			)}
 		</div>
 	);
