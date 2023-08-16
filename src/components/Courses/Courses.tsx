@@ -3,6 +3,7 @@ import { CourseCard } from './components/CourseCard/CourseCard';
 import styles from './courses.module.scss';
 import { EmptyCourseList } from './components/EmptyCourseList/EmptyCourseList';
 import { defineAuthors } from 'src/helpers/courseData';
+import { Button } from 'src/common/Button/Button';
 
 function checkCourses(data) {
 	if (data.coursesList.length) {
@@ -29,6 +30,7 @@ export const Courses = (props) => {
 				coursesList: props.coursesList,
 				toggleInfo: props.toggleInfo,
 			})}
+			<Button buttonText='Add New Course' className={styles.button} />
 		</div>
 	);
 };
