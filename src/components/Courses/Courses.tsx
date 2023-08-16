@@ -10,7 +10,6 @@ interface Course {
 	creationDate: Date;
 	duration: number;
 	authors: Array<string>;
-	showCourse: any;
 }
 
 interface Author {
@@ -18,38 +17,36 @@ interface Author {
 	name: string;
 }
 
-function defineAuthors(id: Array<string>, mockedAuthorsList) {
-	for (let i = 0; i < id.length; i++) {
+function defineAuthors(ids: Array<string>, mockedAuthorsList: Author[]) {
+	for (let i = 0; i < ids.length; i++) {
 		mockedAuthorsList.forEach((au) => {
-			if (id[i] === au.id) {
-				id[i] = au.name;
+			if (ids[i] === au.id) {
+				ids[i] = au.name;
 			}
 		});
 	}
-	return id;
+	return ids;
 }
 
 function checkCourses(
 	mockedAuthorsList: Array<Author>,
 	mockedCoursesList: Array<Course>,
-	toggleInfo: any
+	toggleInfo: (value: string) => boolean
 ) {
-	const list = mockedCoursesList.length > 0;
-	if (list) {
+	if (mockedCoursesList.length) {
 		return mockedCoursesList.map((e) => {
 			e.authors = defineAuthors(e.authors, mockedAuthorsList);
-			e.showCourse = toggleInfo;
-			return <CourseCard {...e} />;
+			return <CourseCard {...{ e, toggleInfo }} />;
 		});
 	} else {
 		return <EmptyCourseList />;
 	}
 }
 
-export const Courses = (prop) => {
+export const Courses = (props) => {
 	return (
 		<div className={styles.courses}>
-			{checkCourses(prop.authList, prop.coursesList, prop.toggleInfo)}
+			{checkCourses(props.authList, props.coursesList, props.toggleInfo)}
 		</div>
 	);
 };

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Header from './components/Header/Header';
+import { Header } from './components/Header/Header';
 import { Courses } from './components/Courses/Courses';
 import { mockedAuthorsList, mockedCoursesList } from 'src/constants';
 import styles from './app.scss';
@@ -8,8 +8,8 @@ import { CourseInfo } from './components/CourseInfo/CourseInfo';
 function App() {
 	const [info, setInfo] = useState(true);
 
-	function toggleInfo() {
-		setInfo(!info);
+	function toggleInfo(courseId: string) {
+		setInfo((prev) => !prev);
 	}
 
 	return (
