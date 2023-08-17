@@ -1,0 +1,58 @@
+.coursecard {
+    position: relative;
+    border: double;
+    border-width: thin;
+    box-shadow: 0px 2px 2px;
+    margin-top: 10px;
+    height: 200px;
+    border-left-style: solid;
+    border-left-width: 10px;
+}
+
+.title {
+    position: absolute;
+    margin: 10px;
+    font-weight: bold;
+}
+
+.description {
+    position: relative;
+    top: 30px;
+    margin: 10px;
+    width: 70%;
+}
+
+.authors {
+    position: absolute;
+    top: 30px;
+    left: 80%;
+    margin: 10px;
+}
+
+.duration {
+    position: relative; 
+    left: 80%;
+    margin-left: 10px;
+}
+
+.creationDate {
+    position: relative;
+    left: 80%;
+    margin-left: 10px;
+}
+
+
+.button {
+    position: relative;
+    left: 80%;
+    margin-left: 10px;
+    width: 140px;
+    height: 40px;
+    border-radius: 8px;
+    border-width: 0;
+    color: #333333;
+    background-color: rgba(51, 51, 51, 0.05);
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+}

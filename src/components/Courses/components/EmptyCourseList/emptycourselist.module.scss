@@ -1,0 +1,27 @@
+.title {
+    position: relative;
+    text-align: center;
+    margin-top: 20%;
+    font-weight: bold;
+    font-size: large;
+}
+
+.help {
+    position: relative;
+    text-align: center;
+    font-weight: lighter;
+    font-size: medium;
+}
+
+.button {
+    position: relative;
+    text-align: center;
+    width: 140px;
+    height: 40px;
+    border-radius: 8px;
+    border-width: 0;
+    color: #333333;
+    background-color: rgba(51, 51, 51, 0.05);
+    cursor: pointer;
+    font-size: 14px;
+}
