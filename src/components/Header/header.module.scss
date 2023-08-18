@@ -9,8 +9,15 @@
     box-shadow: 0px 2px 2px;
 }
 
+.userName {
+    position: absolute;
+    left: 45%;
+    top: 30px;
+    font-weight: bold;
+}
+
 .button {
-    position: relative;
+    position: absolute;
     left: 89%;
     top: 30px;
     width: 140px;
