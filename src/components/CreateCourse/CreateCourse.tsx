@@ -13,7 +13,7 @@ export const CreateCourse = () => {
 			<p className={styles.title}>Course Edit/Create page</p>
 			<form className={styles.form}>
 				<p className={styles.section}>Main info</p>
-				<label className={styles.mainparam}>Title</label>
+				<label className={styles.param}>Title</label>
 				<Input
 					className={styles.input}
 					id='title'
@@ -30,6 +30,7 @@ export const CreateCourse = () => {
 					label='duration'
 					placeholderText='Input duration'
 				/>
+				<p className={styles.duration}>00:00 hours</p>
 				<p className={styles.section}>Authors</p>
 				<label className={styles.param}>Author name</label>
 				<Input

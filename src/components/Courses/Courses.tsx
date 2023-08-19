@@ -32,7 +32,9 @@ export const Courses = (props) => {
 			})}
 			<Button
 				buttonText='Add New Course'
-				className={styles.button}
+				className={
+					props.coursesList.length ? styles.button : styles.buttonEmptyList
+				}
 				onClick={() => {
 					navigate('/courses/add', { replace: true });
 				}}

@@ -2,7 +2,7 @@
     position: -webkit-sticky; /* Safari */
     position: sticky;
     top: 0;
-    height: 100px;
+    height: 80px;
     width: 100%;
     border-bottom: double;
     border-bottom-width: thin;
@@ -12,14 +12,14 @@
 .userName {
     position: absolute;
     left: 45%;
-    top: 30px;
+    top: 15px;
     font-weight: bold;
 }
 
 .button {
     position: absolute;
     left: 89%;
-    top: 30px;
+    top: 20px;
     width: 140px;
     height: 40px;
     border-radius: 8px;
