@@ -5,6 +5,8 @@ import { Input } from 'src/common/Input/Input';
 import { Link, useNavigate } from 'react-router-dom';
 
 export const Registration = () => {
+	localStorage.setItem('token', '');
+	localStorage.setItem('userName', '');
 	const navigate = useNavigate();
 
 	async function handleSubmit(event) {

@@ -12,6 +12,11 @@ import { CreateCourse } from './components/CreateCourse/CreateCourse';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
+function PrivateRoute({ children }) {
+	const token = localStorage.getItem('token');
+	return token ? children : <Navigate to='/login' />;
+}
+
 root.render(
 	<BrowserRouter>
 		<Routes>
@@ -19,14 +24,30 @@ root.render(
 				<Route
 					path='/courses'
 					element={
-						<Courses
-							authList={mockedAuthorsList}
-							coursesList={mockedCoursesList}
-						/>
+						<PrivateRoute>
+							<Courses
+								authList={mockedAuthorsList}
+								coursesList={mockedCoursesList}
+							/>
+						</PrivateRoute>
 					}
 				/>
-				<Route path='/courses/:courseId' element={<CourseInfo />} />
-				<Route path='/courses/add' element={<CreateCourse />} />
+				<Route
+					path='/courses/:courseId'
+					element={
+						<PrivateRoute>
+							<CourseInfo />
+						</PrivateRoute>
+					}
+				/>
+				<Route
+					path='/courses/add'
+					element={
+						<PrivateRoute>
+							<CreateCourse />
+						</PrivateRoute>
+					}
+				/>
 				<Route path='/registration' element={<Registration />} />
 				<Route path='/login' element={<Login />} />
 			</Route>
