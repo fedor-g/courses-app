@@ -20,7 +20,7 @@ function PrivateRoute({ children }) {
 root.render(
 	<BrowserRouter>
 		<Routes>
-			<Route path='/' element={<App />}>
+			<Route element={<App />}>
 				<Route
 					path='/courses'
 					element={
@@ -51,7 +51,7 @@ root.render(
 				<Route path='/registration' element={<Registration />} />
 				<Route path='/login' element={<Login />} />
 			</Route>
-			<Route path='*' element={<Navigate to='/' />} />
+			<Route path='*' element={<Navigate to='/courses' />} />
 		</Routes>
 	</BrowserRouter>
 );
