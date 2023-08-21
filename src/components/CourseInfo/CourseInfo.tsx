@@ -1,15 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './courseinfo.module.scss';
 import { Button } from 'src/common/Button/Button';
 import { defineAuthors, defineCourse } from 'src/helpers/courseData';
 import moment from 'moment';
-import { mockedAuthorsList } from 'src/constants';
 import { useNavigate, useParams } from 'react-router-dom';
+import { getCourses, getAuthors } from 'src/services';
+import { CourseType } from 'src/store/courses/types';
+import { AuthType } from 'src/store/authors/types';
+
+async function defineCourses() {
+	const recievedCourses = await getCourses();
+	const recievedAuthors = await getAuthors();
+
+	return { courses: recievedCourses, auths: recievedAuthors };
+}
 
 export const CourseInfo = () => {
 	const params = useParams();
-	const course = defineCourse(params.courseId);
 	const navigate = useNavigate();
+
+	const [courses, setCourses] = useState<CourseType[]>();
+	const [authors, setAuthors] = useState<AuthType[]>();
+
+	useEffect(() => {
+		async function fetchCourses() {
+			const result = await defineCourses();
+			setCourses(result.courses);
+			setAuthors(result.auths);
+		}
+		fetchCourses();
+	}, []);
+
+	const course = defineCourse(courses, params.id);
+	const auth = defineAuthors(course.authors, authors);
+
 	return (
 		<div className={styles.info}>
 			<p className={styles.title}>{course.title}</p>
@@ -29,12 +53,7 @@ export const CourseInfo = () => {
 					.format('DD.MM.YYYY')
 					.toLocaleString()}
 			</p>
-			<p>
-				{' '}
-				Authors: {defineAuthors(course.authors, mockedAuthorsList).join(
-					', '
-				)}{' '}
-			</p>
+			<p> Authors: {auth.join(', ')} </p>
 			<Button
 				buttonText='BACK'
 				className={styles.button}

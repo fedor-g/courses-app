@@ -16,7 +16,8 @@ export async function getCourses(): Promise<CourseType[]> {
 	if (data.successful === false) {
 		return [];
 	}
-
+	console.log('>>>');
+	console.log(data);
 	return data.result.map((course: CourseType) => ({
 		id: course.id,
 		title: course.title,
@@ -42,7 +43,8 @@ export async function getAuthors(): Promise<AuthType[]> {
 	if (data.successful === false) {
 		return [];
 	}
-
+	console.log('>>>');
+	console.log(data);
 	return data.result.map((auth: AuthType) => ({
 		id: auth.id,
 		name: auth.name,

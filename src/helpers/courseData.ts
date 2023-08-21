@@ -1,5 +1,3 @@
-import { mockedCoursesList } from 'src/constants';
-
 interface Course {
 	id: string;
 	title: string;
@@ -16,13 +14,14 @@ interface Author {
 
 export function defineAuthors(
 	ids: Array<string>,
-	mockedAuthorsList: Author[]
+	authList: Array<Author>
 ): string[] {
-	return ids.map(
-		(id) => mockedAuthorsList.find((author) => author.id === id).name
-	);
+	return ids.map((id) => authList.find((author) => author.id === id).name);
 }
 
-export function defineCourse(courseId: string): Course {
-	return mockedCoursesList.find((course) => course.id === courseId);
+export function defineCourse(
+	coursesList: Array<Course>,
+	courseId: string
+): Course {
+	return coursesList.find((course) => course.id === courseId);
 }
