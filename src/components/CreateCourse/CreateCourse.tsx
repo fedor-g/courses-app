@@ -39,7 +39,11 @@ export const CreateCourse = () => {
 					label='authors'
 					placeholderText='Add authors from list'
 				/>
-				<Button className={styles.button} buttonText={'CREATE AUTHOR'} />
+				<Button
+					className={styles.button}
+					buttonText={'CREATE AUTHOR'}
+					type='button'
+				/>
 				<p className={styles.authList}>Authors List</p>
 				{authList.map((e) => {
 					return <AuthorItem authorName={e.name} />;

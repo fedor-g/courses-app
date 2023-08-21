@@ -6,11 +6,9 @@ import moment from 'moment';
 import { mockedAuthorsList } from 'src/constants';
 import { useNavigate, useParams } from 'react-router-dom';
 
-let course;
-
 export const CourseInfo = () => {
 	const params = useParams();
-	course = defineCourse(params.courseId);
+	const course = defineCourse(params.courseId);
 	const navigate = useNavigate();
 	return (
 		<div className={styles.info}>

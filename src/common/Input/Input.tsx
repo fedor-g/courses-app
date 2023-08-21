@@ -7,6 +7,6 @@ export const Input = (props) => {
 			type='text'
 			id={props.id}
 			placeholder={props.placeholderText}
-		></input>
+		/>
 	);
 };
