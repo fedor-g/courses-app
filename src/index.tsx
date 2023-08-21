@@ -9,6 +9,8 @@ import { Registration } from './components/Registration/Registration';
 import { mockedAuthorsList, mockedCoursesList } from './constants';
 import { Login } from './components/Login/Login';
 import { CreateCourse } from './components/CreateCourse/CreateCourse';
+import { Provider } from 'react-redux';
+import store from './store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -18,40 +20,42 @@ function PrivateRoute({ children }) {
 }
 
 root.render(
-	<BrowserRouter>
-		<Routes>
-			<Route element={<App />}>
-				<Route
-					path='/courses'
-					element={
-						<PrivateRoute>
-							<Courses
-								authList={mockedAuthorsList}
-								coursesList={mockedCoursesList}
-							/>
-						</PrivateRoute>
-					}
-				/>
-				<Route
-					path='/courses/:courseId'
-					element={
-						<PrivateRoute>
-							<CourseInfo />
-						</PrivateRoute>
-					}
-				/>
-				<Route
-					path='/courses/add'
-					element={
-						<PrivateRoute>
-							<CreateCourse />
-						</PrivateRoute>
-					}
-				/>
-				<Route path='/registration' element={<Registration />} />
-				<Route path='/login' element={<Login />} />
-			</Route>
-			<Route path='*' element={<Navigate to='/courses' />} />
-		</Routes>
-	</BrowserRouter>
+	<Provider store={store}>
+		<BrowserRouter>
+			<Routes>
+				<Route element={<App />}>
+					<Route
+						path='/courses'
+						element={
+							<PrivateRoute>
+								<Courses
+									authList={mockedAuthorsList}
+									coursesList={mockedCoursesList}
+								/>
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path='/courses/:courseId'
+						element={
+							<PrivateRoute>
+								<CourseInfo />
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path='/courses/add'
+						element={
+							<PrivateRoute>
+								<CreateCourse />
+							</PrivateRoute>
+						}
+					/>
+					<Route path='/registration' element={<Registration />} />
+					<Route path='/login' element={<Login />} />
+				</Route>
+				<Route path='*' element={<Navigate to='/courses' />} />
+			</Routes>
+		</BrowserRouter>
+	</Provider>
 );
