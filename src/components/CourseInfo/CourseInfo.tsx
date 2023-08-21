@@ -4,11 +4,12 @@ import { Button } from 'src/common/Button/Button';
 import { defineAuthors, defineCourse } from 'src/helpers/courseData';
 import moment from 'moment';
 import { mockedAuthorsList } from 'src/constants';
+import { useNavigate, useParams } from 'react-router-dom';
 
-let course;
-
-export const CourseInfo = (props) => {
-	course = defineCourse(props.id);
+export const CourseInfo = () => {
+	const params = useParams();
+	const course = defineCourse(params.courseId);
+	const navigate = useNavigate();
 	return (
 		<div className={styles.info}>
 			<p className={styles.title}>{course.title}</p>
@@ -37,7 +38,9 @@ export const CourseInfo = (props) => {
 			<Button
 				buttonText='BACK'
 				className={styles.button}
-				onClick={() => props.toggleInfo('')}
+				onClick={() => {
+					navigate('/courses', { replace: true });
+				}}
 			/>
 		</div>
 	);

@@ -3,6 +3,7 @@ import { Button } from 'src/common/Button/Button';
 import styles from './coursecard.module.scss';
 import moment from 'moment';
 import 'moment-duration-format';
+import { useNavigate } from 'react-router-dom';
 
 const STRING_SIZE = 18;
 
@@ -17,6 +18,7 @@ function shortenAuthors(authors: string) {
 }
 
 export const CourseCard = (props) => {
+	const navigate = useNavigate();
 	return (
 		<div className={styles.coursecard}>
 			<p className={styles.title}> {props.title} </p>
@@ -36,7 +38,9 @@ export const CourseCard = (props) => {
 			</p>
 			<Button
 				buttonText='SHOW COURSE'
-				onClick={() => props.toggleInfo(props.id)}
+				onClick={() => {
+					navigate('/courses/' + props.id, { replace: true });
+				}}
 				className={styles.button}
 			/>
 		</div>

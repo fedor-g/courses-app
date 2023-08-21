@@ -4,6 +4,7 @@ import styles from './courses.module.scss';
 import { EmptyCourseList } from './components/EmptyCourseList/EmptyCourseList';
 import { defineAuthors } from 'src/helpers/courseData';
 import { Button } from 'src/common/Button/Button';
+import { useNavigate } from 'react-router-dom';
 
 function checkCourses(data) {
 	if (data.coursesList.length) {
@@ -12,7 +13,6 @@ function checkCourses(data) {
 				<CourseCard
 					{...e}
 					key={e.id}
-					toggleInfo={data.toggleInfo}
 					authors={defineAuthors(e.authors, data.authList)}
 				/>
 			);
@@ -23,14 +23,22 @@ function checkCourses(data) {
 }
 
 export const Courses = (props) => {
+	const navigate = useNavigate();
 	return (
 		<div className={styles.courses}>
 			{checkCourses({
 				authList: props.authList,
 				coursesList: props.coursesList,
-				toggleInfo: props.toggleInfo,
 			})}
-			<Button buttonText='Add New Course' className={styles.button} />
+			<Button
+				buttonText='Add New Course'
+				className={
+					props.coursesList.length ? styles.button : styles.buttonEmptyList
+				}
+				onClick={() => {
+					navigate('/courses/add', { replace: true });
+				}}
+			/>
 		</div>
 	);
 };
