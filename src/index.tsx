@@ -6,11 +6,10 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { Courses } from './components/Courses/Courses';
 import { CourseInfo } from './components/CourseInfo/CourseInfo';
 import { Registration } from './components/Registration/Registration';
-import { mockedAuthorsList, mockedCoursesList } from './constants';
 import { Login } from './components/Login/Login';
 import { CreateCourse } from './components/CreateCourse/CreateCourse';
 import { Provider } from 'react-redux';
-import store from './store';
+import { store } from './store/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -28,10 +27,7 @@ root.render(
 						path='/courses'
 						element={
 							<PrivateRoute>
-								<Courses
-									authList={mockedAuthorsList}
-									coursesList={mockedCoursesList}
-								/>
+								<Courses />
 							</PrivateRoute>
 						}
 					/>

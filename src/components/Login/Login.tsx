@@ -3,10 +3,13 @@ import styles from './login.module.scss';
 import { Button } from 'src/common/Button/Button';
 import { Input } from 'src/common/Input/Input';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAppDispatch } from 'src/helpers/hooks';
+import { UserActionTypes } from 'src/store/user/types';
 
 export const Login = () => {
 	localStorage.setItem('token', '');
 	localStorage.setItem('userName', '');
+	const dispatch = useAppDispatch();
 
 	const [falseEmail, setEmailState] = useState('');
 	const [falsePassword, setPassState] = useState('');
@@ -70,6 +73,12 @@ export const Login = () => {
 
 		localStorage.setItem('token', result.result);
 		localStorage.setItem('userName', result.user.name);
+
+		dispatch({
+			type: UserActionTypes.ADD_USER,
+			payload: { name: result.user.name, email: result.user.email },
+		});
+
 		navigate('/courses', { replace: true });
 	}
 

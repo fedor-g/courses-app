@@ -1,4 +1,4 @@
-interface Course {
+export interface Course {
 	id: string;
 	title: string;
 	description: string;
@@ -7,7 +7,7 @@ interface Course {
 	authors: Array<string>;
 }
 
-interface Author {
+export interface Author {
 	id: string;
 	name: string;
 }

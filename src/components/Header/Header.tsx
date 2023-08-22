@@ -3,17 +3,27 @@ import Logo from './components/Logo/Logo';
 import { Button } from 'src/common/Button/Button';
 import styles from './header.module.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from 'src/helpers/hooks';
+import { UserActionTypes } from 'src/store/user/types';
 
 export const Header = () => {
 	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
+	const selector = useAppSelector((state) => state.users);
+	const location = useLocation();
 
 	const token = localStorage.getItem('token');
-	const userName = localStorage.getItem('userName');
-	const location = useLocation();
+	let user;
+	let userName;
+
+	if (selector[0]) {
+		user = selector[0];
+		userName = user.name;
+	}
 
 	function handlePush() {
 		localStorage.setItem('token', '');
-		localStorage.setItem('userName', '');
+		dispatch({ type: UserActionTypes.DELETE_USER, payload: user.email });
 		navigate('/login', { replace: true });
 	}
 

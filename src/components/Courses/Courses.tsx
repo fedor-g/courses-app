@@ -1,51 +1,65 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CourseCard } from './components/CourseCard/CourseCard';
 import styles from './courses.module.scss';
 import { EmptyCourseList } from './components/EmptyCourseList/EmptyCourseList';
-import { defineAuthors } from 'src/helpers/courseData';
+import { defineAuthors, Course, Author } from 'src/helpers/courseData';
 import { Button } from 'src/common/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { getAuthors, getCourses } from 'src/services';
+import { useAppDispatch, useAppSelector } from 'src/helpers/hooks';
+import { CoursesActionTypes } from 'src/store/courses/types';
+import { AuthorsActionTypes } from 'src/store/authors/types';
 
-async function checkCourses(): Promise<ReactNode[]> {
-	const recievedCourses = await getCourses();
-	const recievedAuthors = await getAuthors();
-
-	if (recievedCourses.length) {
-		return recievedCourses.map((e) => {
+function getElements(courses: Array<Course>, authors: Array<Author>) {
+	if (courses.length && authors.length) {
+		return courses.map((e) => {
 			return (
 				<CourseCard
 					{...e}
 					key={e.id}
-					authors={defineAuthors(e.authors, recievedAuthors)}
+					authors={defineAuthors(e.authors, authors)}
 				/>
 			);
 		});
-	} else {
-		return [<EmptyCourseList key='empty' />];
-	}
+	} else return [];
 }
 
-export const Courses = (props) => {
+async function checkCourses() {
+	const recievedCourses = await getCourses();
+	const recievedAuthors = await getAuthors();
+
+	return { courses: recievedCourses, auths: recievedAuthors };
+}
+
+export const Courses = () => {
 	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
 	const [courses, setCourses] = useState([]);
+	const [authors, setAuthors] = useState([]);
 
 	useEffect(() => {
 		async function fetchCourses() {
 			const result = await checkCourses();
-			setCourses(result);
+			setCourses(result.courses);
+			setAuthors(result.auths);
 		}
 		fetchCourses();
 	}, []);
 
+	dispatch({ type: CoursesActionTypes.SAVE_COURSES, payload: courses });
+	dispatch({ type: AuthorsActionTypes.SAVE_AUTHORS, payload: authors });
+
+	const coursesFromStore = useAppSelector((state) => state.courses);
+	const authorsFromStore = useAppSelector((state) => state.authors);
+
+	const resultCourses = getElements(coursesFromStore, authorsFromStore);
+
 	return (
 		<div className={styles.courses}>
-			{courses.length ? courses : <>Sorry</>}
+			{resultCourses ? resultCourses : <EmptyCourseList />}
 			<Button
 				buttonText='Add New Course'
-				className={
-					props.coursesList.length ? styles.button : styles.buttonEmptyList
-				}
+				className={courses.length ? styles.button : styles.buttonEmptyList}
 				onClick={() => {
 					navigate('/courses/add', { replace: true });
 				}}

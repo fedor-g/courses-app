@@ -58,3 +58,44 @@
     font-size: 14px;
     text-align: center;
 }
+
+.removeButton {
+    position: absolute;
+    top: 140px;
+    left: 90%;
+    margin-left: 15px;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border-width: 0;
+    color: #333333;
+    background-color: rgba(51, 51, 51, 0.05);
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    background-image: url('../../../../common/Logo/RemoveLogo/logo.png');
+    background-size: 20px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+.editButton {
+    position: absolute;
+    top: 140px;
+    left: 90%;
+    margin-left: 60px;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border-width: 0;
+    color: #333333;
+    background-color: rgba(51, 51, 51, 0.05);
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    background-image: url('../../../../common/Logo/EditLogo/logo.png');
+    background-size: 22px;
+    background-position: center;
+    background-repeat: no-repeat;
+}

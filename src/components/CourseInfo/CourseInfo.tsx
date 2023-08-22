@@ -11,28 +11,36 @@ import { AuthType } from 'src/store/authors/types';
 async function defineCourses() {
 	const recievedCourses = await getCourses();
 	const recievedAuthors = await getAuthors();
-
 	return { courses: recievedCourses, auths: recievedAuthors };
 }
 
 export const CourseInfo = () => {
 	const params = useParams();
 	const navigate = useNavigate();
-
 	const [courses, setCourses] = useState<CourseType[]>();
 	const [authors, setAuthors] = useState<AuthType[]>();
 
+	async function fetchCourses() {
+		const result = await defineCourses();
+		setCourses(result.courses);
+		setAuthors(result.auths);
+	}
+
 	useEffect(() => {
-		async function fetchCourses() {
-			const result = await defineCourses();
-			setCourses(result.courses);
-			setAuthors(result.auths);
-		}
 		fetchCourses();
 	}, []);
 
-	const course = defineCourse(courses, params.id);
-	const auth = defineAuthors(course.authors, authors);
+	const course = courses ? defineCourse(courses, params.courseId) : null;
+
+	if (!course) {
+		return null;
+	}
+
+	const auth = authors ? defineAuthors(course.authors, authors) : null;
+
+	if (!auth) {
+		return null;
+	}
 
 	return (
 		<div className={styles.info}>
