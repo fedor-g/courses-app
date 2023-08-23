@@ -34,20 +34,21 @@ async function checkCourses() {
 export const Courses = () => {
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
-	const [courses, setCourses] = useState([]);
-	const [authors, setAuthors] = useState([]);
 
 	useEffect(() => {
 		async function fetchCourses() {
 			const result = await checkCourses();
-			setCourses(result.courses);
-			setAuthors(result.auths);
+			dispatch({
+				type: CoursesActionTypes.SAVE_COURSES,
+				payload: result.courses,
+			});
+			dispatch({
+				type: AuthorsActionTypes.SAVE_AUTHORS,
+				payload: result.auths,
+			});
 		}
 		fetchCourses();
 	}, []);
-
-	dispatch({ type: CoursesActionTypes.SAVE_COURSES, payload: courses });
-	dispatch({ type: AuthorsActionTypes.SAVE_AUTHORS, payload: authors });
 
 	const coursesFromStore = useAppSelector((state) => state.courses);
 	const authorsFromStore = useAppSelector((state) => state.authors);
@@ -59,7 +60,9 @@ export const Courses = () => {
 			{resultCourses ? resultCourses : <EmptyCourseList />}
 			<Button
 				buttonText='Add New Course'
-				className={courses.length ? styles.button : styles.buttonEmptyList}
+				className={
+					coursesFromStore.length ? styles.button : styles.buttonEmptyList
+				}
 				onClick={() => {
 					navigate('/courses/add', { replace: true });
 				}}

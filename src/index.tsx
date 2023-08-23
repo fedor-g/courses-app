@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import { App } from './App';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { Courses } from './components/Courses/Courses';
 import { CourseInfo } from './components/CourseInfo/CourseInfo';
