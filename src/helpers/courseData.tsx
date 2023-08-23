@@ -1,3 +1,7 @@
+import React from 'react';
+
+const STRING_SIZE = 18;
+
 export interface Course {
 	id: string;
 	title: string;
@@ -24,4 +28,10 @@ export function defineCourse(
 	courseId: string
 ): Course {
 	return coursesList.find((course) => course.id === courseId);
+}
+
+export function shortenAuthors(authors: string) {
+	return authors.length > STRING_SIZE
+		? authors.substring(0, STRING_SIZE) + '...'
+		: authors;
 }

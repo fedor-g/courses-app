@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './createcourse.module.scss';
 import { Input } from 'src/common/Input/Input';
 import { Button } from 'src/common/Button/Button';
-import { AuthorItem } from './components/AuthorItem/AuthorItem';
+import { AuthorsList } from './components/AuthorsList/AuthorsList';
+import { CourseAuthors } from './components/CourseAuthors/CourseAuthors';
 
 export const CreateCourse = () => {
-	const [authList, updAuthList] = useState([]);
-	const [courseAuthList, updCourseAuthList] = useState([]);
-
 	return (
 		<div className={styles.createcourse}>
 			<p className={styles.title}>Course Edit/Create page</p>
@@ -31,7 +29,7 @@ export const CreateCourse = () => {
 					placeholderText='Input duration'
 				/>
 				<p className={styles.duration}>00:00 hours</p>
-				<p className={styles.section}>Authors</p>
+				<p className={styles.authSection}>Authors</p>
 				<label className={styles.param}>Author name</label>
 				<Input
 					className={styles.input}
@@ -40,18 +38,23 @@ export const CreateCourse = () => {
 					placeholderText='Add authors from list'
 				/>
 				<Button
-					className={styles.button}
+					className={styles.addAuthButton}
 					buttonText={'CREATE AUTHOR'}
 					type='button'
+					onClick={() => {
+						console.log('click');
+					}}
 				/>
-				<p className={styles.authList}>Authors List</p>
-				{authList.map((e) => {
-					return <AuthorItem authorName={e.name} />;
-				})}
-				<p className={styles.courseAuthList}>Course Authors</p>
-				{courseAuthList.map((e) => {
-					return <AuthorItem authorName={e.name} />;
-				})}
+				<AuthorsList className={styles.authList} />
+				<CourseAuthors className={styles.courseAuthList} />
+				<Button
+					className={styles.createButton}
+					buttonText={'SAVE COURSE'}
+					type='button'
+					onClick={() => {
+						console.log('click');
+					}}
+				/>
 			</form>
 		</div>
 	);

@@ -1,0 +1,42 @@
+.item {
+    width: 200px;
+    height: 30px;
+}
+
+.label {
+    font-size: small;
+}
+
+.add {
+    position:absolute;
+    right: 0px;
+    width: 15px;
+    height: 15px;
+    border-radius: 8px;
+    border-width: 0;
+    color: #333333;
+    background-color: rgba(51, 51, 51, 0.05);
+    cursor: pointer;
+    text-align: center;
+    background-image: url('../../../../common/Logo/AddLogo/add.png');
+    background-size: 10px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.remove {
+    position:absolute;
+    right: 0px;
+    width: 15px;
+    height: 15px;
+    border-radius: 8px;
+    border-width: 0;
+    color: #333333;
+    background-color: rgba(51, 51, 51, 0.05);
+    cursor: pointer;
+    text-align: center;
+    background-image: url('../../../../common/Logo/RemoveLogo/logo.png');
+    background-size: 10px;
+    background-position: center;
+    background-repeat: no-repeat;
+}

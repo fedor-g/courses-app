@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button } from 'src/common/Button/Button';
 import styles from './coursecard.module.scss';
 import moment from 'moment';
@@ -6,18 +6,7 @@ import 'moment-duration-format';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from 'src/helpers/hooks';
 import { CoursesActionTypes } from 'src/store/courses/types';
-
-const STRING_SIZE = 18;
-
-function shortenAuthors(authors: string) {
-	return (
-		<>
-			{authors.length > STRING_SIZE
-				? authors.substring(0, STRING_SIZE) + '...'
-				: authors}
-		</>
-	);
-}
+import { shortenAuthors } from 'src/helpers/courseData';
 
 export const CourseCard = (props) => {
 	const navigate = useNavigate();

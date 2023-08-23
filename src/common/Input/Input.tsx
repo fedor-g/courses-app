@@ -4,8 +4,9 @@ export const Input = (props) => {
 	return (
 		<input
 			className={props.className}
-			type='text'
+			type={props.type}
 			id={props.id}
+			//label={props.label}
 			placeholder={props.placeholderText}
 		/>
 	);

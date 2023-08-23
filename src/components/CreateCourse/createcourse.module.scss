@@ -30,7 +30,15 @@
     font-weight: bold;
     font-size: larger;
     margin-bottom: 0px;
-    margin-top: 30px;
+    margin-top: 10px;
+}
+
+.authSection {
+    position: relative;
+    font-weight: bold;
+    font-size: larger;
+    margin-bottom: 0px;
+    margin-top: -20px;
 }
 
 .input {
@@ -61,7 +69,7 @@
     margin-bottom: 0px;
 }
 
-.button {
+.addAuthButton {
     position: relative;
     top: -35px;
     left: 220px;
@@ -78,20 +86,29 @@
 
 .authList {
     position: relative;
-    text-align: left;
-    font-weight: bold;
-    font-size: medium;
-    margin-top: 0px;
-    top: -30px;
-    left: 50px;
+    width: 200px;
+    margin-top: -40px;
 }
+
 
 .courseAuthList {
     position: relative;
-    text-align: left;
-    font-weight: bold;
-    font-size: medium;
-    margin-top: 0px;
-    top: -60px;
-    left: 350%;
+    width: 200px;
+    left: 700px;
+    top: -300px
+}
+
+.createButton {
+    position: absolute;
+    top: 500px;
+    left: 380%;
+    width: 140px;
+    height: 40px;
+    border-radius: 8px;
+    border-width: 0;
+    color: #333333;
+    background-color: rgba(51, 51, 51, 0.05);
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
 }
