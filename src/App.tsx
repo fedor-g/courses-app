@@ -18,11 +18,11 @@ export const App = () => {
 		});
 	}
 
-	if (token) {
-		useEffect(() => {
+	useEffect(() => {
+		if (token) {
 			fetchCourses();
-		}, []);
-	}
+		}
+	}, []);
 
 	return (
 		<div className={styles.main}>
