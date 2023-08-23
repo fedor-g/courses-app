@@ -40,7 +40,7 @@ root.render(
 						}
 					/>
 					<Route
-						path='/courses/add'
+						path='/courses/edit'
 						element={
 							<PrivateRoute>
 								<CreateCourse />

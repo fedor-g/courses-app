@@ -21,6 +21,7 @@
     position: relative;
     text-align: left;
     width: 200px;
+    height: 600px;
     margin-left: 50px;
     margin-top: 0px;
 }
@@ -46,6 +47,14 @@
     text-align: left;
     width: 200px;
     margin-bottom: 5px;
+}
+
+.error {
+    position: absolute;
+    font-size: x-small;
+    color: red;
+    margin-top: -5px;
+    width: 400px;
 }
 
 .param {
@@ -98,7 +107,7 @@
     top: -300px
 }
 
-.createButton {
+.saveButton {
     position: absolute;
     top: 500px;
     left: 380%;
@@ -111,4 +120,19 @@
     cursor: pointer;
     font-size: 14px;
     text-align: center;
+}
+
+.backButton {
+    position: relative;
+    text-align: center;
+    left: 860px;
+    top: 0px;
+    width: 140px;
+    height: 40px;
+    border-radius: 8px;
+    border-width: 0;
+    color: #333333;
+    background-color: rgba(51, 51, 51, 0.05);
+    cursor: pointer;
+    font-size: 14px;
 }

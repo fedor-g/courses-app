@@ -64,7 +64,7 @@ export const Courses = () => {
 					coursesFromStore.length ? styles.button : styles.buttonEmptyList
 				}
 				onClick={() => {
-					navigate('/courses/add', { replace: true });
+					navigate('/courses/edit', { replace: true });
 				}}
 			/>
 		</div>

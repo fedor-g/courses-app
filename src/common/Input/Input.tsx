@@ -6,8 +6,8 @@ export const Input = (props) => {
 			className={props.className}
 			type={props.type}
 			id={props.id}
-			//label={props.label}
 			placeholder={props.placeholderText}
+			onChange={props.onChange}
 		/>
 	);
 };
