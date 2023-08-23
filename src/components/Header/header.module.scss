@@ -1,12 +1,14 @@
 .header {
     position: -webkit-sticky; /* Safari */
-    position: sticky;
+    position:sticky;
     top: 0;
     height: 80px;
     width: 100%;
     border-bottom: double;
     border-bottom-width: thin;
     box-shadow: 0px 2px 2px;
+    background-color: white;
+    z-index: 1;
 }
 
 .userName {
