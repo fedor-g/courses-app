@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './createcourse.module.scss';
 import { Input } from 'src/common/Input/Input';
 import { Button } from 'src/common/Button/Button';
@@ -7,6 +7,7 @@ import { CourseAuthors } from './components/CourseAuthors/CourseAuthors';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from 'src/helpers/hooks';
 import { AuthorsActionTypes } from 'src/store/authors/types';
+import { retrieveCoursesAndAuthors } from 'src/services';
 
 export const CreateCourse = (props) => {
 	const [inputTitle, setTitle] = useState(props.title);
@@ -21,6 +22,17 @@ export const CreateCourse = (props) => {
 	const [falseDesc, setDescError] = useState('');
 	const [falseDur, setDurError] = useState('');
 	const [falseAuth, setAuthError] = useState('');
+
+	useEffect(() => {
+		async function fetchCourses() {
+			const result = await retrieveCoursesAndAuthors();
+			dispatch({
+				type: AuthorsActionTypes.SAVE_AUTHORS,
+				payload: result.auths,
+			});
+		}
+		fetchCourses();
+	}, []);
 
 	async function handleSubmit(event) {
 		setTitleError('');

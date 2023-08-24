@@ -5,6 +5,7 @@ import styles from './header.module.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'src/helpers/hooks';
 import { UserActionTypes } from 'src/store/user/types';
+import { logout } from 'src/services';
 
 export const Header = () => {
 	const navigate = useNavigate();
@@ -22,6 +23,7 @@ export const Header = () => {
 	}
 
 	function handlePush() {
+		logout(localStorage.getItem('token'));
 		localStorage.setItem('token', '');
 		dispatch({ type: UserActionTypes.DELETE_USER, payload: user.email });
 		navigate('/login', { replace: true });

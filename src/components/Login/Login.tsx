@@ -5,6 +5,7 @@ import { Input } from 'src/common/Input/Input';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from 'src/helpers/hooks';
 import { UserActionTypes } from 'src/store/user/types';
+import { login } from 'src/services';
 
 export const Login = () => {
 	localStorage.setItem('token', '');
@@ -49,25 +50,10 @@ export const Login = () => {
 			password,
 		};
 
-		let response;
+		const result = await login(user);
 
-		try {
-			response = await fetch('http://localhost:4000/login', {
-				method: 'POST',
-				body: JSON.stringify(user),
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			});
-		} catch (error) {
-			console.error(error);
-			return false;
-		}
-
-		const result = await response.json();
-
-		if (result.successful === false) {
-			setLoginState(() => result.result);
+		if (result === false) {
+			setLoginState(() => 'Fail to login');
 			return false;
 		}
 

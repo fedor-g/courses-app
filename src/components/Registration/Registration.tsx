@@ -3,6 +3,7 @@ import styles from './registration.module.scss';
 import { Button } from 'src/common/Button/Button';
 import { Input } from 'src/common/Input/Input';
 import { Link, useNavigate } from 'react-router-dom';
+import { register } from 'src/services';
 
 export const Registration = () => {
 	localStorage.setItem('token', '');
@@ -56,19 +57,10 @@ export const Registration = () => {
 			password,
 		};
 
-		const response = await fetch('http://localhost:4000/register', {
-			method: 'POST',
-			body: JSON.stringify(newUser),
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		});
+		const result = await register(newUser);
 
-		const result = await response.json();
-
-		if (result.successful === false) {
-			const errors: Array<string> = result.errors;
-			setRegisterState(() => errors.join(', '));
+		if (!result) {
+			setRegisterState('Fail to register');
 			return false;
 		}
 
@@ -88,7 +80,12 @@ export const Registration = () => {
 					{falseEmail}
 				</p>
 				<label className={styles.param}>Password</label>
-				<Input className={styles.input} id='password' label='password' />
+				<Input
+					className={styles.input}
+					id='password'
+					label='password'
+					type='password'
+				/>
 				<p className={styles.error}>{falsePassword}</p>
 				<p className={styles.error}>{failToRegister}</p>
 				<Button
