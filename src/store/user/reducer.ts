@@ -2,9 +2,9 @@ import { UserActionTypes } from './types';
 
 export const usersInitialState = [];
 
-export const usersReducer = (state = usersInitialState, action) => {
+export const userReducer = (state = usersInitialState, action) => {
 	switch (action.type) {
-		case UserActionTypes.SAVE_USERS:
+		case UserActionTypes.SAVE_USER:
 			return action.payload;
 		case UserActionTypes.ADD_USER:
 			return [...state, action.payload];

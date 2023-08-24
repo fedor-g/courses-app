@@ -11,6 +11,7 @@ import { shortenAuthors } from 'src/helpers/courseData';
 export const CourseCard = (props) => {
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
+	const roleAdmin = localStorage.getItem('userRole') === 'admin';
 
 	function removeCourse(id: string) {
 		return dispatch({ type: CoursesActionTypes.DELETE_COURSE, payload: id });
@@ -40,12 +41,16 @@ export const CourseCard = (props) => {
 				}}
 				className={styles.button}
 			/>
-			<Button
-				buttonText=''
-				onClick={() => removeCourse(props.id)}
-				className={styles.removeButton}
-			/>
-			<Button buttonText='' className={styles.editButton} />
+			{roleAdmin ? (
+				<Button
+					buttonText=''
+					onClick={() => removeCourse(props.id)}
+					className={styles.removeButton}
+				/>
+			) : (
+				''
+			)}
+			{roleAdmin ? <Button buttonText='' className={styles.editButton} /> : ''}
 		</div>
 	);
 };

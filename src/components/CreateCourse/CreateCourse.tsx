@@ -5,11 +5,13 @@ import { Button } from 'src/common/Button/Button';
 import { AuthorsList } from './components/AuthorsList/AuthorsList';
 import { CourseAuthors } from './components/CourseAuthors/CourseAuthors';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from 'src/helpers/hooks';
+import { useAppDispatch, useAppSelector } from 'src/helpers/hooks';
 import { AuthorsActionTypes } from 'src/store/authors/types';
-import { retrieveCoursesAndAuthors } from 'src/services';
+import { createAuthor, retrieveCoursesAndAuthors } from 'src/services';
+import { Author } from 'src/helpers/courseData';
 
 export const CreateCourse = (props) => {
+	const token = localStorage.getItem('token');
 	const [inputTitle, setTitle] = useState(props.title);
 	const [inputDesc, setDesc] = useState(props.desc);
 	const [inputDur, setDur] = useState(props.dur);
@@ -22,6 +24,10 @@ export const CreateCourse = (props) => {
 	const [falseDesc, setDescError] = useState('');
 	const [falseDur, setDurError] = useState('');
 	const [falseAuth, setAuthError] = useState('');
+
+	const authorsFromStore: Array<Author> = useAppSelector(
+		(state) => state.authors
+	);
 
 	useEffect(() => {
 		async function fetchCourses() {
@@ -44,7 +50,7 @@ export const CreateCourse = (props) => {
 		const title: string = event.target.title.value;
 		const desc: string = event.target.desc.value;
 		const dur: number = event.target.duration.value;
-		const author: string = event.target.author.value;
+		const authors: Author[] = event.target.author.value;
 
 		let fail = false;
 
@@ -85,14 +91,20 @@ export const CreateCourse = (props) => {
 		} else if (author.length < 2) {
 			setAuthError(() => 'Text length should be at least 2 characters');
 			fail = true;
+		} else if (authorsFromStore.filter((e) => e.name === author).length > 0) {
+			setAuthError(() => 'Author already exists');
+			fail = true;
 		}
 
 		if (fail) return false;
-		//SAVE AUTH
-		//GET AUTH
+
+		const request = await createAuthor(author, token);
+
+		if (!request) return false;
+
 		dispatch({
 			type: AuthorsActionTypes.ADD_AUTHOR,
-			payload: { name: author },
+			payload: request,
 		});
 	}
 

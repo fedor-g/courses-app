@@ -327,18 +327,15 @@ export async function createAuthor(inputName: string, token: string) {
 		});
 	} catch (error) {
 		console.error(error);
-		return [];
+		return false;
 	}
 
 	const data = await response.json();
 
 	if (data.successful === false) {
-		return [];
+		return false;
 	}
-	return data.result.map((auth: AuthType) => ({
-		id: auth.id,
-		name: auth.name,
-	}));
+	return { id: data.result.id, name: data.result.name };
 }
 
 export async function getAuthorById(id: string): Promise<AuthType> {
@@ -446,5 +443,10 @@ export async function checkMe(token: string): Promise<UserType> {
 		return null;
 	}
 
-	return { name: data.result.name, email: data.result.email };
+	return {
+		id: data.result.id,
+		name: data.result.name,
+		email: data.result.email,
+		role: data.result.role,
+	};
 }

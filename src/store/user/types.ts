@@ -1,10 +1,12 @@
 export type UserType = {
+	id: string;
 	name: string;
 	email: string;
+	role: string;
 };
 
 export const enum UserActionTypes {
-	SAVE_USERS = 'SAVE_USERS',
+	SAVE_USER = 'SAVE_USER',
 	ADD_USER = 'ADD_USER',
 	DELETE_USER = 'DELETE_USER',
 }

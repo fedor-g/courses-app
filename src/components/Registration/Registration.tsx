@@ -7,7 +7,7 @@ import { register } from 'src/services';
 
 export const Registration = () => {
 	localStorage.setItem('token', '');
-	localStorage.setItem('userName', '');
+	localStorage.setItem('userRole', '');
 
 	const [falseName, setNameState] = useState('');
 	const [falseEmail, setEmailState] = useState('');

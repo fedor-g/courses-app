@@ -16,9 +16,16 @@ export const App = () => {
 			localStorage.setItem('activeSession', 'false');
 			return;
 		}
+
+		localStorage.setItem('userRole', result.role);
 		dispatch({
 			type: UserActionTypes.ADD_USER,
-			payload: { name: result.name, email: result.email },
+			payload: {
+				id: result.id,
+				name: result.name,
+				email: result.email,
+				role: result.role,
+			},
 		});
 	}
 

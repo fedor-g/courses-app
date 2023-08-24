@@ -45,21 +45,26 @@ export const Courses = () => {
 
 	const coursesFromStore = useAppSelector((state) => state.courses);
 	const authorsFromStore = useAppSelector((state) => state.authors);
+	const roleAdmin = localStorage.getItem('userRole') === 'admin';
 
 	const resultCourses = getElements(coursesFromStore, authorsFromStore);
 
 	return (
 		<div className={styles.courses}>
 			{resultCourses || <EmptyCourseList />}
-			<Button
-				buttonText='Add New Course'
-				className={
-					coursesFromStore.length ? styles.button : styles.buttonEmptyList
-				}
-				onClick={() => {
-					navigate('/courses/edit', { replace: true });
-				}}
-			/>
+			{roleAdmin ? (
+				<Button
+					buttonText='Add New Course'
+					className={
+						coursesFromStore.length ? styles.button : styles.buttonEmptyList
+					}
+					onClick={() => {
+						navigate('/courses/edit', { replace: true });
+					}}
+				/>
+			) : (
+				''
+			)}
 		</div>
 	);
 };

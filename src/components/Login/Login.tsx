@@ -5,11 +5,11 @@ import { Input } from 'src/common/Input/Input';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from 'src/helpers/hooks';
 import { UserActionTypes } from 'src/store/user/types';
-import { login } from 'src/services';
+import { checkMe, login } from 'src/services';
 
 export const Login = () => {
 	localStorage.setItem('token', '');
-	localStorage.setItem('userName', '');
+	localStorage.setItem('userRole', '');
 	const dispatch = useAppDispatch();
 
 	const [falseEmail, setEmailState] = useState('');
@@ -57,13 +57,23 @@ export const Login = () => {
 			return false;
 		}
 
+		const roleCheck = await checkMe(result.result);
+
+		if (result === false) {
+			setLoginState(() => 'Invalid user role');
+			return false;
+		}
+
 		localStorage.setItem('token', result.result);
-		localStorage.setItem('userName', result.user.name);
 		localStorage.setItem('activeSession', 'true');
+		localStorage.setItem('userRole', roleCheck.role);
 
 		dispatch({
 			type: UserActionTypes.ADD_USER,
-			payload: { name: result.user.name, email: result.user.email },
+			payload: {
+				name: result.user.name,
+				email: result.user.email,
+			},
 		});
 
 		navigate('/courses', { replace: true });

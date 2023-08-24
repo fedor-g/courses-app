@@ -1,26 +1,35 @@
 import React, { useState } from 'react';
 import { shortenAuthors } from 'src/helpers/courseData';
 import { AuthorItem } from '../AuthorItem/AuthorItem';
+import { useAppDispatch, useAppSelector } from 'src/helpers/hooks';
+import { AuthorsActionTypes } from 'src/store/authors/types';
+import { CourseAuthorsActionTypes } from 'src/store/courseAuthors/types';
 
 export const CourseAuthors = (props) => {
-	const [courseAuthList, updCourseAuthList] = useState([
-		{ name: 'name4 surname4' },
-		{ name: 'name5 surname5' },
-		{ name: 'n6 s6' },
-		{ name: '12345678901234567890123456789' },
-	]);
+	const dispatch = useAppDispatch();
+	const courseAuthorsFromStore = useAppSelector((state) => state.courseAuthors);
+
+	function removeAuthoursFromCourse(id: string, name: string) {
+		const author = { id: id, name: name };
+		dispatch({
+			type: CourseAuthorsActionTypes.DELETE_COURSE_AUTHOR,
+			payload: id,
+		});
+		dispatch({ type: AuthorsActionTypes.ADD_AUTHOR, payload: author });
+	}
 
 	return (
 		<div className={props.className}>
 			<p>
 				<b>Course Authors</b>
 			</p>
-			{courseAuthList.map((e) => {
+			{courseAuthorsFromStore.map((e) => {
 				return (
 					<AuthorItem
 						key={e.name}
 						authorName={shortenAuthors(e.name)}
 						create={false}
+						onClick={() => removeAuthoursFromCourse(e.id, e.name)}
 					/>
 				);
 			})}

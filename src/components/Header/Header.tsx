@@ -10,7 +10,7 @@ import { logout } from 'src/services';
 export const Header = () => {
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
-	const selector = useAppSelector((state) => state.users);
+	const selector = useAppSelector((state) => state.user);
 	const location = useLocation();
 
 	const token = localStorage.getItem('token');
@@ -25,6 +25,7 @@ export const Header = () => {
 	function handlePush() {
 		logout(localStorage.getItem('token'));
 		localStorage.setItem('token', '');
+		localStorage.setItem('userRole', '');
 		dispatch({ type: UserActionTypes.DELETE_USER, payload: user.email });
 		navigate('/login', { replace: true });
 	}

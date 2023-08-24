@@ -8,6 +8,8 @@ export const authorsReducer = (state = authorsInitialState, action) => {
 			return action.payload;
 		case AuthorsActionTypes.ADD_AUTHOR:
 			return [...state, action.payload];
+		case AuthorsActionTypes.DELETE_AUTHOR:
+			return state.filter((item) => item.id !== action.payload);
 		default:
 			return state;
 	}

@@ -19,6 +19,13 @@ function PrivateRoute({ children }) {
 	return token && session ? children : <Navigate to='/login' />;
 }
 
+function AdminPrivateRoute({ children }) {
+	const token = localStorage.getItem('token');
+	const session = localStorage.getItem('activeSession') === 'true';
+	const roleAdmin = localStorage.getItem('userRole') === 'admin';
+	return token && session && roleAdmin ? children : <Navigate to='/courses' />;
+}
+
 root.render(
 	<Provider store={store}>
 		<BrowserRouter>
@@ -43,9 +50,9 @@ root.render(
 					<Route
 						path='/courses/edit'
 						element={
-							<PrivateRoute>
+							<AdminPrivateRoute>
 								<CreateCourse />
-							</PrivateRoute>
+							</AdminPrivateRoute>
 						}
 					/>
 					<Route path='/registration' element={<Registration />} />
