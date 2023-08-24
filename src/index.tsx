@@ -15,7 +15,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 function PrivateRoute({ children }) {
 	const token = localStorage.getItem('token');
-	return token ? children : <Navigate to='/login' />;
+	const session = localStorage.getItem('activeSession') === 'true';
+	return token && session ? children : <Navigate to='/login' />;
 }
 
 root.render(

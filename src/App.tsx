@@ -12,6 +12,10 @@ export const App = () => {
 
 	async function fetchCourses() {
 		const result = await checkMe(token);
+		if (!result) {
+			localStorage.setItem('activeSession', 'false');
+			return;
+		}
 		dispatch({
 			type: UserActionTypes.ADD_USER,
 			payload: { name: result.name, email: result.email },

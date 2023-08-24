@@ -73,6 +73,7 @@ export const Login = () => {
 
 		localStorage.setItem('token', result.result);
 		localStorage.setItem('userName', result.user.name);
+		localStorage.setItem('activeSession', 'true');
 
 		dispatch({
 			type: UserActionTypes.ADD_USER,
