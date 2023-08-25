@@ -1,15 +1,47 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './courseinfo.module.scss';
 import { Button } from 'src/common/Button/Button';
 import { defineAuthors, defineCourse } from 'src/helpers/courseData';
 import moment from 'moment';
-import { mockedAuthorsList } from 'src/constants';
 import { useNavigate, useParams } from 'react-router-dom';
+import { getCourses, getAuthors } from 'src/services';
+import { CourseType } from 'src/store/courses/types';
+import { AuthType } from 'src/store/authors/types';
+
+async function defineCourses() {
+	const recievedCourses = await getCourses();
+	const recievedAuthors = await getAuthors();
+	return { courses: recievedCourses, auths: recievedAuthors };
+}
 
 export const CourseInfo = () => {
 	const params = useParams();
-	const course = defineCourse(params.courseId);
 	const navigate = useNavigate();
+	const [courses, setCourses] = useState<CourseType[]>();
+	const [authors, setAuthors] = useState<AuthType[]>();
+
+	async function fetchCourses() {
+		const result = await defineCourses();
+		setCourses(result.courses);
+		setAuthors(result.auths);
+	}
+
+	useEffect(() => {
+		fetchCourses();
+	}, []);
+
+	const course = courses ? defineCourse(courses, params.courseId) : null;
+
+	if (!course) {
+		return null;
+	}
+
+	const auth = authors ? defineAuthors(course.authors, authors) : null;
+
+	if (!auth) {
+		return null;
+	}
+
 	return (
 		<div className={styles.info}>
 			<p className={styles.title}>{course.title}</p>
@@ -17,7 +49,9 @@ export const CourseInfo = () => {
 				<b>Description:</b>
 			</p>
 			<p>{course.description}</p>
-			<p>ID: {course.id}</p>
+			<p>
+				<b>ID</b>: {course.id}
+			</p>
 			<p>
 				{' '}
 				<b>Duration: </b>
@@ -30,10 +64,7 @@ export const CourseInfo = () => {
 					.toLocaleString()}
 			</p>
 			<p>
-				{' '}
-				Authors: {defineAuthors(course.authors, mockedAuthorsList).join(
-					', '
-				)}{' '}
+				<b>Authors:</b> {auth.join(', ')}{' '}
 			</p>
 			<Button
 				buttonText='BACK'

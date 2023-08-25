@@ -4,21 +4,25 @@ import styles from './coursecard.module.scss';
 import moment from 'moment';
 import 'moment-duration-format';
 import { useNavigate } from 'react-router-dom';
-
-const STRING_SIZE = 18;
-
-function shortenAuthors(authors: string) {
-	return (
-		<>
-			{authors.length > STRING_SIZE
-				? authors.substring(0, STRING_SIZE) + '...'
-				: authors}
-		</>
-	);
-}
+import { useAppDispatch } from 'src/helpers/hooks';
+import { shortenAuthors } from 'src/helpers/courseData';
+import { deleteCourse } from 'src/services';
 
 export const CourseCard = (props) => {
 	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
+	const roleAdmin = localStorage.getItem('userRole') === 'admin';
+	const token = localStorage.getItem('token');
+
+	async function removeCourse(id: string) {
+		const result = await deleteCourse(id, token);
+		if (result) {
+			return dispatch({ type: 'DELETE_COURSE', payload: id });
+		} else {
+			return false;
+		}
+	}
+
 	return (
 		<div className={styles.coursecard}>
 			<p className={styles.title}> {props.title} </p>
@@ -43,6 +47,16 @@ export const CourseCard = (props) => {
 				}}
 				className={styles.button}
 			/>
+			{roleAdmin ? (
+				<Button
+					buttonText=''
+					onClick={() => removeCourse(props.id)}
+					className={styles.removeButton}
+				/>
+			) : (
+				''
+			)}
+			{roleAdmin ? <Button buttonText='' className={styles.editButton} /> : ''}
 		</div>
 	);
 };

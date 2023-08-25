@@ -1,12 +1,17 @@
 import React from 'react';
+import { Button } from 'src/common/Button/Button';
 import styles from './authoritem.module.scss';
-import Logo from './components/Logo/Logo';
 
 export const AuthorItem = (props) => {
 	return (
-		<div>
-			<p className={styles.name}>{props.authorname}</p>+
-			<Logo onClick={props.onClick} />
+		<div className={styles.item}>
+			<label className={styles.label}>{props.authorName} </label>
+			<Button
+				className={props.create ? styles.add : styles.remove}
+				buttonText={''}
+				type='button'
+				onClick={props.onClick}
+			/>
 		</div>
 	);
 };
