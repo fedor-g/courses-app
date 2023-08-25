@@ -56,7 +56,17 @@ export const CourseCard = (props) => {
 			) : (
 				''
 			)}
-			{roleAdmin ? <Button buttonText='' className={styles.editButton} /> : ''}
+			{roleAdmin ? (
+				<Button
+					buttonText=''
+					className={styles.editButton}
+					onClick={() => {
+						navigate('/courses/update/' + props.id, { replace: true });
+					}}
+				/>
+			) : (
+				''
+			)}
 		</div>
 	);
 };

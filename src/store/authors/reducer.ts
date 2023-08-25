@@ -7,6 +7,8 @@ export const authorsReducer = (
 	action: AuthorsActionTypes
 ) => {
 	switch (action.type) {
+		case 'THUNK_SAVE_AUTHORS':
+			return action.payload;
 		case 'SAVE_AUTHORS':
 			return action.payload;
 		case 'ADD_AUTHOR':

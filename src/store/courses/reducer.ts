@@ -9,6 +9,8 @@ export const coursesReducer = (
 	switch (action.type) {
 		case 'SAVE_COURSES':
 			return action.payload;
+		case 'THUNK_SAVE_COURSES':
+			return action.payload;
 		case 'ADD_COURSE':
 			return [...state, action.payload];
 		case 'DELETE_COURSE':

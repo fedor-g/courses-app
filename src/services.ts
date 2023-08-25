@@ -2,6 +2,10 @@ import { AuthType } from './store/authors/types';
 import { CourseType } from './store/courses/types';
 import { UserType } from './store/user/types';
 
+/**
+ *	All api calls to back end covered
+ */
+
 // Auth
 
 export async function login(user) {
@@ -75,13 +79,6 @@ export async function logout(token: string) {
 	}
 
 	return true;
-}
-
-export async function retrieveCoursesAndAuthors() {
-	const recievedCourses = await getCourses();
-	const recievedAuthors = await getAuthors();
-
-	return { courses: recievedCourses, auths: recievedAuthors };
 }
 
 // Courses
@@ -228,7 +225,7 @@ export async function updateCourse(
 	inputId: string,
 	inputTitle: string,
 	inputDescription: string,
-	inputDuration: number,
+	inputDuration: string,
 	inputAuthors: Array<string>,
 	token: string
 ) {
@@ -237,7 +234,7 @@ export async function updateCourse(
 	const input = {
 		title: inputTitle,
 		description: inputDescription,
-		duration: inputDuration,
+		duration: parseInt(inputDuration),
 		authors: inputAuthors,
 	};
 
@@ -254,7 +251,6 @@ export async function updateCourse(
 		console.error(error);
 		return false;
 	}
-
 	const data = await response.json();
 
 	if (data.successful === false) {
