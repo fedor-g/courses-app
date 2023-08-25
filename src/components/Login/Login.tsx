@@ -4,7 +4,6 @@ import { Button } from 'src/common/Button/Button';
 import { Input } from 'src/common/Input/Input';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from 'src/helpers/hooks';
-import { UserActionTypes } from 'src/store/user/types';
 import { checkMe, login } from 'src/services';
 
 export const Login = () => {
@@ -69,7 +68,7 @@ export const Login = () => {
 		localStorage.setItem('userRole', roleCheck.role);
 
 		dispatch({
-			type: UserActionTypes.ADD_USER,
+			type: 'ADD_USER',
 			payload: {
 				name: result.user.name,
 				email: result.user.email,

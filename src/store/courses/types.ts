@@ -7,20 +7,7 @@ export type CourseType = {
 	authors: string[];
 };
 
-export const enum CoursesActionTypes {
-	SAVE_COURSES = 'SAVE_COURSES',
-	ADD_COURSE = 'ADD_COURSE',
-	DELETE_COURSE = 'DELETE_COURSES',
-}
-
-type AddNewCourseAction = {
-	type: CoursesActionTypes.ADD_COURSE;
-	payload: CourseType;
-};
-
-export const addNewCourseAction = (
-	courseData: CourseType
-): AddNewCourseAction => ({
-	type: CoursesActionTypes.ADD_COURSE,
-	payload: courseData,
-});
+export type CoursesActionTypes =
+	| { type: 'SAVE_COURSES'; payload }
+	| { type: 'ADD_COURSE'; payload }
+	| { type: 'DELETE_COURSE'; payload };

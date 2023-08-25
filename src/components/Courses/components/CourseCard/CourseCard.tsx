@@ -5,7 +5,6 @@ import moment from 'moment';
 import 'moment-duration-format';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from 'src/helpers/hooks';
-import { CoursesActionTypes } from 'src/store/courses/types';
 import { shortenAuthors } from 'src/helpers/courseData';
 
 export const CourseCard = (props) => {
@@ -14,7 +13,7 @@ export const CourseCard = (props) => {
 	const roleAdmin = localStorage.getItem('userRole') === 'admin';
 
 	function removeCourse(id: string) {
-		return dispatch({ type: CoursesActionTypes.DELETE_COURSE, payload: id });
+		return dispatch({ type: 'DELETE_COURSE', payload: id });
 	}
 
 	return (

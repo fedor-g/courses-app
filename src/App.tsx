@@ -4,7 +4,6 @@ import styles from './app.scss';
 import { Outlet } from 'react-router-dom';
 import { useAppDispatch } from './helpers/hooks';
 import { checkMe } from './services';
-import { UserActionTypes } from './store/user/types';
 
 export const App = () => {
 	const token = localStorage.getItem('token');
@@ -19,7 +18,7 @@ export const App = () => {
 
 		localStorage.setItem('userRole', result.role);
 		dispatch({
-			type: UserActionTypes.ADD_USER,
+			type: 'ADD_USER',
 			payload: {
 				id: result.id,
 				name: result.name,

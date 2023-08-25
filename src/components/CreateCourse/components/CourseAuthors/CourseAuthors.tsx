@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { shortenAuthors } from 'src/helpers/courseData';
 import { AuthorItem } from '../AuthorItem/AuthorItem';
 import { useAppDispatch, useAppSelector } from 'src/helpers/hooks';
-import { AuthorsActionTypes } from 'src/store/authors/types';
-import { CourseAuthorsActionTypes } from 'src/store/courseAuthors/types';
 
 export const CourseAuthors = (props) => {
 	const dispatch = useAppDispatch();
@@ -12,10 +10,10 @@ export const CourseAuthors = (props) => {
 	function removeAuthoursFromCourse(id: string, name: string) {
 		const author = { id: id, name: name };
 		dispatch({
-			type: CourseAuthorsActionTypes.DELETE_COURSE_AUTHOR,
+			type: 'DELETE_COURSE_AUTHOR',
 			payload: id,
 		});
-		dispatch({ type: AuthorsActionTypes.ADD_AUTHOR, payload: author });
+		dispatch({ type: 'ADD_AUTHOR', payload: author });
 	}
 
 	return (

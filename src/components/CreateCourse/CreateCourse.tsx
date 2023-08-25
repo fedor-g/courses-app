@@ -6,7 +6,6 @@ import { AuthorsList } from './components/AuthorsList/AuthorsList';
 import { CourseAuthors } from './components/CourseAuthors/CourseAuthors';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'src/helpers/hooks';
-import { AuthorsActionTypes } from 'src/store/authors/types';
 import { createAuthor, retrieveCoursesAndAuthors } from 'src/services';
 import { Author } from 'src/helpers/courseData';
 
@@ -33,7 +32,7 @@ export const CreateCourse = (props) => {
 		async function fetchCourses() {
 			const result = await retrieveCoursesAndAuthors();
 			dispatch({
-				type: AuthorsActionTypes.SAVE_AUTHORS,
+				type: 'SAVE_AUTHORS',
 				payload: result.auths,
 			});
 		}
@@ -103,7 +102,7 @@ export const CreateCourse = (props) => {
 		if (!request) return false;
 
 		dispatch({
-			type: AuthorsActionTypes.ADD_AUTHOR,
+			type: 'ADD_AUTHOR',
 			payload: request,
 		});
 	}

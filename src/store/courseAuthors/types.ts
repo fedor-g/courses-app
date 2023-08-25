@@ -3,8 +3,7 @@ export type AuthType = {
 	name: string;
 };
 
-export const enum CourseAuthorsActionTypes {
-	SAVE_COURSE_AUTHORS = 'SAVE_COURSE_AUTHORS',
-	ADD_COURSE_AUTHOR = 'ADD_COURSE_AUTHOR',
-	DELETE_COURSE_AUTHOR = 'DELETE_COURSE_AUTHOR',
-}
+export type CourseAuthorsActionTypes =
+	| { type: 'SAVE_COURSE_AUTHORS'; payload }
+	| { type: 'ADD_COURSE_AUTHOR'; payload }
+	| { type: 'DELETE_COURSE_AUTHOR'; payload };
