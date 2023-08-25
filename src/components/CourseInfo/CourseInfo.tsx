@@ -30,15 +30,13 @@ export const CourseInfo = () => {
 		fetchCourses();
 	}, []);
 
-	const course =
-		courses.length > 0 ? defineCourse(courses, params.courseId) : null;
+	const course = courses ? defineCourse(courses, params.courseId) : null;
 
 	if (!course) {
 		return null;
 	}
 
-	const auth =
-		authors.length > 0 ? defineAuthors(course.authors, authors) : null;
+	const auth = authors ? defineAuthors(course.authors, authors) : null;
 
 	if (!auth) {
 		return null;

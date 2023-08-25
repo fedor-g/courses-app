@@ -5,11 +5,11 @@ import { useAppDispatch, useAppSelector } from 'src/helpers/hooks';
 
 export const AuthorsList = (props) => {
 	const dispatch = useAppDispatch();
-	const authorsFromStore = useAppSelector((state) => state.authors);
+	const authorsFromStore = useAppSelector((state) => state.createAuthors);
 
 	function addAuthourToCourse(id: string, name: string) {
 		const author = { id: id, name: name };
-		dispatch({ type: 'DELETE_AUTHOR', payload: id });
+		dispatch({ type: 'CC_DELETE_AUTHOR', payload: id });
 		dispatch({
 			type: 'ADD_COURSE_AUTHOR',
 			payload: author,

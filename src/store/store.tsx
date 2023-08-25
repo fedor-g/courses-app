@@ -2,13 +2,15 @@ import { configureStore } from '@reduxjs/toolkit';
 import { coursesReducer } from './courses/reducer';
 import { authorsReducer } from './authors/reducer';
 import { usersReducer } from './user/reducer';
-import { courseAuthorsReducer } from './courseAuthors/reducer';
+import { createCourseAuthorsReducer } from './createCourseAuthors/reducer';
+import { createAuthorsReducer } from './createAuthors/reducer';
 
 export const store = configureStore({
 	reducer: {
 		courses: coursesReducer,
 		authors: authorsReducer,
-		courseAuthors: courseAuthorsReducer,
+		createAuthors: createAuthorsReducer,
+		createCourseAuthors: createCourseAuthorsReducer,
 		users: usersReducer,
 	},
 });

@@ -6,8 +6,13 @@ import { AuthorsList } from './components/AuthorsList/AuthorsList';
 import { CourseAuthors } from './components/CourseAuthors/CourseAuthors';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'src/helpers/hooks';
-import { createAuthor, retrieveCoursesAndAuthors } from 'src/services';
+import {
+	createAuthor,
+	createCourse,
+	retrieveCoursesAndAuthors,
+} from 'src/services';
 import { Author } from 'src/helpers/courseData';
+import moment from 'moment';
 
 export const CreateCourse = (props) => {
 	const token = localStorage.getItem('token');
@@ -23,16 +28,20 @@ export const CreateCourse = (props) => {
 	const [falseDesc, setDescError] = useState('');
 	const [falseDur, setDurError] = useState('');
 	const [falseAuth, setAuthError] = useState('');
+	const [falseCourseAuth, setCourseAuthError] = useState('');
 
 	const authorsFromStore: Array<Author> = useAppSelector(
-		(state) => state.authors
+		(state) => state.createAuthors
+	);
+	const courseAuthorsFromStore = useAppSelector(
+		(state) => state.createCourseAuthors
 	);
 
 	useEffect(() => {
 		async function fetchCourses() {
 			const result = await retrieveCoursesAndAuthors();
 			dispatch({
-				type: 'SAVE_AUTHORS',
+				type: 'CC_SAVE_AUTHORS',
 				payload: result.auths,
 			});
 		}
@@ -44,12 +53,13 @@ export const CreateCourse = (props) => {
 		setDescError('');
 		setDurError('');
 		setAuthError('');
+		setCourseAuthError('');
 		event.preventDefault();
 
 		const title: string = event.target.title.value;
 		const desc: string = event.target.desc.value;
-		const dur: number = event.target.duration.value;
-		const authors: Author[] = event.target.author.value;
+		const dur: string = event.target.duration.value;
+		const authors: Author[] = courseAuthorsFromStore;
 
 		let fail = false;
 
@@ -70,12 +80,34 @@ export const CreateCourse = (props) => {
 		if (!dur) {
 			setDurError(() => 'Course duration is required');
 			fail = true;
-		} else if (dur < 1) {
+		} else if (parseInt(dur) < 1) {
 			setDurError(() => 'Course duration is incorrect');
+			fail = true;
+		} else if (parseInt(dur) > 1000) {
+			setDurError(() => 'Course duration is unreal');
+			fail = true;
+		}
+		if (!authors || authors.length < 1) {
+			setCourseAuthError(() => 'Course author is required');
 			fail = true;
 		}
 
 		if (fail) return false;
+
+		const result = await createCourse(
+			title,
+			desc,
+			dur,
+			authors.map((e) => e.id),
+			token
+		);
+
+		if (result) {
+			clearCourseAuthors();
+			navigate('/courses', { replace: true });
+		} else {
+			return false;
+		}
 	}
 
 	async function handleAddAuth(event) {
@@ -102,8 +134,17 @@ export const CreateCourse = (props) => {
 		if (!request) return false;
 
 		dispatch({
-			type: 'ADD_AUTHOR',
+			type: 'CC_ADD_AUTHOR',
 			payload: request,
+		});
+	}
+
+	function clearCourseAuthors() {
+		dispatch({
+			type: 'CC_DELETE_AUTHORS',
+		});
+		dispatch({
+			type: 'DELETE_COURSE_AUTHORS',
 		});
 	}
 
@@ -134,9 +175,12 @@ export const CreateCourse = (props) => {
 					id='duration'
 					label='duration'
 					placeholderText='Input duration'
+					onChange={(e) => setDur(e.target.value)}
 				/>
 				<p className={styles.error}>{falseDur}</p>
-				<p className={styles.duration}>00:00 hours</p>
+				<p className={styles.duration}>
+					{moment.duration(inputDur, 'minutes').format('HH:mm')} hours
+				</p>
 				<p className={styles.authSection}>Authors</p>
 				<label className={styles.param}>Author name</label>
 				<Input
@@ -154,6 +198,7 @@ export const CreateCourse = (props) => {
 					onClick={handleAddAuth}
 				/>
 				<AuthorsList className={styles.authList} />
+				<p className={styles.createCourseError}>{falseCourseAuth}</p>
 				<CourseAuthors className={styles.courseAuthList} />
 				<Button
 					className={styles.saveButton}
@@ -165,6 +210,7 @@ export const CreateCourse = (props) => {
 				buttonText='BACK'
 				className={styles.backButton}
 				onClick={() => {
+					clearCourseAuthors();
 					navigate('/courses', { replace: true });
 				}}
 			/>

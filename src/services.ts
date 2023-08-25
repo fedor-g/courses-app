@@ -162,7 +162,7 @@ export async function getFilteredCourses(
 export async function createCourse(
 	inputTitle: string,
 	inputDescription: string,
-	inputDuration: number,
+	inputDuration: string,
 	inputAuthors: Array<string>,
 	token: string
 ) {
@@ -171,7 +171,7 @@ export async function createCourse(
 	const input = {
 		title: inputTitle,
 		description: inputDescription,
-		duration: inputDuration,
+		duration: parseInt(inputDuration),
 		authors: inputAuthors,
 	};
 
@@ -190,6 +190,7 @@ export async function createCourse(
 	}
 
 	const data = await response.json();
+	console.log(data);
 
 	if (data.successful === false) {
 		return false;
