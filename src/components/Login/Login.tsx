@@ -4,11 +4,11 @@ import { Button } from 'src/common/Button/Button';
 import { Input } from 'src/common/Input/Input';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from 'src/helpers/hooks';
-import { UserActionTypes } from 'src/store/user/types';
+import { checkMe, login } from 'src/services';
 
 export const Login = () => {
 	localStorage.setItem('token', '');
-	localStorage.setItem('userName', '');
+	localStorage.setItem('userRole', '');
 	const dispatch = useAppDispatch();
 
 	const [falseEmail, setEmailState] = useState('');
@@ -49,34 +49,30 @@ export const Login = () => {
 			password,
 		};
 
-		let response;
+		const result = await login(user);
 
-		try {
-			response = await fetch('http://localhost:4000/login', {
-				method: 'POST',
-				body: JSON.stringify(user),
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			});
-		} catch (error) {
-			console.error(error);
+		if (result === false) {
+			setLoginState(() => 'Fail to login');
 			return false;
 		}
 
-		const result = await response.json();
+		const roleCheck = await checkMe(result.result);
 
-		if (result.successful === false) {
-			setLoginState(() => result.result);
+		if (result === false) {
+			setLoginState(() => 'Invalid user role');
 			return false;
 		}
 
 		localStorage.setItem('token', result.result);
-		localStorage.setItem('userName', result.user.name);
+		localStorage.setItem('activeSession', 'true');
+		localStorage.setItem('userRole', roleCheck.role);
 
 		dispatch({
-			type: UserActionTypes.ADD_USER,
-			payload: { name: result.user.name, email: result.user.email },
+			type: 'ADD_USER',
+			payload: {
+				name: result.user.name,
+				email: result.user.email,
+			},
 		});
 
 		navigate('/courses', { replace: true });

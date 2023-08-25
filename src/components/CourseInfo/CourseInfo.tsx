@@ -49,7 +49,9 @@ export const CourseInfo = () => {
 				<b>Description:</b>
 			</p>
 			<p>{course.description}</p>
-			<p>ID: {course.id}</p>
+			<p>
+				<b>ID</b>: {course.id}
+			</p>
 			<p>
 				{' '}
 				<b>Duration: </b>
@@ -61,7 +63,9 @@ export const CourseInfo = () => {
 					.format('DD.MM.YYYY')
 					.toLocaleString()}
 			</p>
-			<p> Authors: {auth.join(', ')} </p>
+			<p>
+				<b>Authors:</b> {auth.join(', ')}{' '}
+			</p>
 			<Button
 				buttonText='BACK'
 				className={styles.button}

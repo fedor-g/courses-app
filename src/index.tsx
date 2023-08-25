@@ -15,7 +15,15 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 function PrivateRoute({ children }) {
 	const token = localStorage.getItem('token');
-	return token ? children : <Navigate to='/login' />;
+	const session = localStorage.getItem('activeSession') === 'true';
+	return token && session ? children : <Navigate to='/login' />;
+}
+
+function AdminPrivateRoute({ children }) {
+	const token = localStorage.getItem('token');
+	const session = localStorage.getItem('activeSession') === 'true';
+	const roleAdmin = localStorage.getItem('userRole') === 'admin';
+	return token && session && roleAdmin ? children : <Navigate to='/courses' />;
 }
 
 root.render(
@@ -40,11 +48,11 @@ root.render(
 						}
 					/>
 					<Route
-						path='/courses/add'
+						path='/courses/edit'
 						element={
-							<PrivateRoute>
+							<AdminPrivateRoute>
 								<CreateCourse />
-							</PrivateRoute>
+							</AdminPrivateRoute>
 						}
 					/>
 					<Route path='/registration' element={<Registration />} />

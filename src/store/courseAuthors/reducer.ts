@@ -1,17 +1,17 @@
-import { AuthorsActionTypes } from './types';
+import { CourseAuthorsActionTypes } from './types';
 
 export const authorsInitialState = [];
 
-export const authorsReducer = (
+export const courseAuthorsReducer = (
 	state = authorsInitialState,
-	action: AuthorsActionTypes
+	action: CourseAuthorsActionTypes
 ) => {
 	switch (action.type) {
-		case 'SAVE_AUTHORS':
+		case 'SAVE_COURSE_AUTHORS':
 			return action.payload;
-		case 'ADD_AUTHOR':
+		case 'ADD_COURSE_AUTHOR':
 			return [...state, action.payload];
-		case 'DELETE_AUTHOR':
+		case 'DELETE_COURSE_AUTHOR':
 			return state.filter((item) => item.id !== action.payload);
 		default:
 			return state;

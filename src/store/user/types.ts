@@ -1,20 +1,11 @@
 export type UserType = {
+	id: string;
 	name: string;
 	email: string;
+	role: string;
 };
 
-export const enum UserActionTypes {
-	SAVE_USERS = 'SAVE_USERS',
-	ADD_USER = 'ADD_USER',
-	DELETE_USER = 'DELETE_USER',
-}
-
-type AddNewUserAction = {
-	type: UserActionTypes.ADD_USER;
-	payload: UserType;
-};
-
-export const addNewCourseAction = (courseData: UserType): AddNewUserAction => ({
-	type: UserActionTypes.ADD_USER,
-	payload: courseData,
-});
+export type UserActionTypes =
+	| { type: 'SAVE_USER'; payload }
+	| { type: 'ADD_USER'; payload }
+	| { type: 'DELETE_USER'; payload };

@@ -6,7 +6,7 @@
     box-shadow: 0px 2px 2px;
     margin: 0 auto;
     margin-top: 70px;
-    height: 600px;
+    height:fit-content;
 }
 
 .title {
@@ -21,6 +21,7 @@
     position: relative;
     text-align: left;
     width: 200px;
+    height: fit-content;
     margin-left: 50px;
     margin-top: 0px;
 }
@@ -30,7 +31,15 @@
     font-weight: bold;
     font-size: larger;
     margin-bottom: 0px;
-    margin-top: 30px;
+    margin-top: 10px;
+}
+
+.authSection {
+    position: relative;
+    font-weight: bold;
+    font-size: larger;
+    margin-bottom: 0px;
+    margin-top: -20px;
 }
 
 .input {
@@ -38,6 +47,14 @@
     text-align: left;
     width: 200px;
     margin-bottom: 5px;
+}
+
+.error {
+    position: absolute;
+    font-size: x-small;
+    color: red;
+    margin-top: -5px;
+    width: 400px;
 }
 
 .param {
@@ -61,7 +78,7 @@
     margin-bottom: 0px;
 }
 
-.button {
+.addAuthButton {
     position: relative;
     top: -35px;
     left: 220px;
@@ -78,20 +95,46 @@
 
 .authList {
     position: relative;
-    text-align: left;
-    font-weight: bold;
-    font-size: medium;
-    margin-top: 0px;
-    top: -30px;
-    left: 50px;
+    height: fit-content;
+    width: 200px;
+    margin-top: -40px;
 }
 
+
 .courseAuthList {
+    position: absolute;
+    height: fit-content;
+    width: 200px;
+    left: 700px;
+    top: 200px
+}
+
+.saveButton {
+    position: absolute;
+    top: 90%;
+    left: 380%;
+    width: 140px;
+    height: 40px;
+    border-radius: 8px;
+    border-width: 0;
+    color: #333333;
+    background-color: rgba(51, 51, 51, 0.05);
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+}
+
+.backButton {
     position: relative;
-    text-align: left;
-    font-weight: bold;
-    font-size: medium;
-    margin-top: 0px;
-    top: -60px;
-    left: 350%;
+    text-align: center;
+    left: 860px;
+    top: 70px;
+    width: 140px;
+    height: 40px;
+    border-radius: 8px;
+    border-width: 0;
+    color: #333333;
+    background-color: rgba(51, 51, 51, 0.05);
+    cursor: pointer;
+    font-size: 14px;
 }
