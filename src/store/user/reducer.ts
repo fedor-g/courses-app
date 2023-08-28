@@ -1,8 +1,8 @@
 import { UserActionTypes } from './types';
 
-export const usersInitialState = [];
+export const usersInitialState = {};
 
-export const usersReducer = (
+export const userReducer = (
 	state = usersInitialState,
 	action: UserActionTypes
 ) => {
@@ -10,9 +10,9 @@ export const usersReducer = (
 		case 'SAVE_USER':
 			return action.payload;
 		case 'ADD_USER':
-			return [...state, action.payload];
+			return action.payload;
 		case 'DELETE_USER':
-			return state.filter((item) => item.email !== action.payload);
+			return usersInitialState;
 		default:
 			return state;
 	}
