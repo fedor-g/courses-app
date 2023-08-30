@@ -6,18 +6,10 @@ import { createStore } from 'redux';
 import { coursesReducer } from 'src/store/courses/reducer';
 import { Provider } from 'react-redux';
 import { shortenAuthors } from 'src/helpers/courseData';
-
-const mockedData = {
-	id: 'testId-6077-4fc4-a519-95b59c862415',
-	title: 'testTitle',
-	description: 'testDescription',
-	authors: ['testAuthorA', 'testAuthorB', 'testAuthorC'],
-	duration: 90,
-	creationDate: 25 - 12 - 1999,
-};
+import { courseData } from 'src/store/tests/data';
 
 const initialState = {
-	courses: [mockedData],
+	courses: [courseData],
 };
 
 const store = createStore(coursesReducer, initialState);
@@ -30,21 +22,19 @@ const Wrapper = ({ children }) => (
 
 describe('CourseCard', () => {
 	it('should have title, desctiption, duration, auth list, creation date', async () => {
-		render(<CourseCard {...mockedData} />, { wrapper: Wrapper });
+		render(<CourseCard {...courseData} />, { wrapper: Wrapper });
+
+		const title = await screen.findByText('testTitle');
+		const description = await screen.findByText('testDescription');
+		const duration = await screen.findByText('01:30 hours');
+		const auths = shortenAuthors(courseData.authors.join(', '));
+		const authors = await screen.findByText(auths);
+		const creationDate = await screen.findByText('25.12.1999');
+
+		expect(title).toBeTruthy();
+		expect(description).toBeTruthy();
+		expect(duration).toBeTruthy();
+		expect(authors).toBeTruthy();
+		expect(creationDate).toBeTruthy();
 	});
-
-	const id = screen.findByText('testId-6077-4fc4-a519-95b59c862415');
-	const title = screen.findByText('testTitle');
-	const description = screen.findByText('testDescription');
-	const duration = screen.findByText('01:30 hours');
-	const auths = shortenAuthors(mockedData.authors.join(', '));
-	const authors = screen.findByText(auths);
-	const creationDate = screen.findByText('25.12.1999');
-
-	expect(id).toBeTruthy();
-	expect(title).toBeTruthy();
-	expect(description).toBeTruthy();
-	expect(duration).toBeTruthy();
-	expect(authors).toBeTruthy();
-	expect(creationDate).toBeTruthy();
 });
