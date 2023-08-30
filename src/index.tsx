@@ -55,6 +55,14 @@ root.render(
 							</AdminPrivateRoute>
 						}
 					/>
+					<Route
+						path='/courses/update/:courseId'
+						element={
+							<AdminPrivateRoute>
+								<CreateCourse />
+							</AdminPrivateRoute>
+						}
+					/>
 					<Route path='/registration' element={<Registration />} />
 					<Route path='/login' element={<Login />} />
 				</Route>

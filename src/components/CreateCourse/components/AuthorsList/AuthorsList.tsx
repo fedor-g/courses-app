@@ -9,9 +9,9 @@ export const AuthorsList = (props) => {
 
 	function addAuthourToCourse(id: string, name: string) {
 		const author = { id: id, name: name };
-		dispatch({ type: 'CC_DELETE_AUTHOR', payload: id });
+		dispatch({ type: 'COURSE_FORM:DELETE_AUTHOR', payload: id });
 		dispatch({
-			type: 'ADD_COURSE_AUTHOR',
+			type: 'COURSE_FORM:ADD_COURSE_AUTHOR',
 			payload: author,
 		});
 	}

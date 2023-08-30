@@ -8,6 +8,7 @@ export const Input = (props) => {
 			id={props.id}
 			placeholder={props.placeholderText}
 			onChange={props.onChange}
+			defaultValue={props.defaultValue}
 		/>
 	);
 };

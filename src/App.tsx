@@ -9,16 +9,17 @@ export const App = () => {
 	const token = localStorage.getItem('token');
 	const dispatch = useAppDispatch();
 
-	async function fetchCourses() {
+	async function fetchUser() {
 		const result = await checkMe(token);
 		if (!result) {
+			localStorage.setItem('token', '');
 			localStorage.setItem('activeSession', 'false');
 			return;
 		}
 
 		localStorage.setItem('userRole', result.role);
 		dispatch({
-			type: 'ADD_USER',
+			type: 'CURRENT_USER:GET_USERS/ME',
 			payload: {
 				id: result.id,
 				name: result.name,
@@ -30,7 +31,7 @@ export const App = () => {
 
 	useEffect(() => {
 		if (token) {
-			fetchCourses();
+			fetchUser();
 		}
 	}, []);
 

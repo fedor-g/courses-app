@@ -17,7 +17,7 @@ export const CourseCard = (props) => {
 	async function removeCourse(id: string) {
 		const result = await deleteCourse(id, token);
 		if (result) {
-			return dispatch({ type: 'DELETE_COURSE', payload: id });
+			return dispatch({ type: 'COUSES_LIST:DELETE_COURSE', payload: id });
 		} else {
 			return false;
 		}
@@ -56,7 +56,17 @@ export const CourseCard = (props) => {
 			) : (
 				''
 			)}
-			{roleAdmin ? <Button buttonText='' className={styles.editButton} /> : ''}
+			{roleAdmin ? (
+				<Button
+					buttonText=''
+					className={styles.editButton}
+					onClick={() => {
+						navigate('/courses/update/' + props.id, { replace: true });
+					}}
+				/>
+			) : (
+				''
+			)}
 		</div>
 	);
 };

@@ -1,5 +1,3 @@
-import React from 'react';
-
 const STRING_SIZE = 18;
 
 export interface Course {

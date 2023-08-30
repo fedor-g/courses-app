@@ -68,7 +68,7 @@ export const Login = () => {
 		localStorage.setItem('userRole', roleCheck.role);
 
 		dispatch({
-			type: 'ADD_USER',
+			type: 'CURRENT_USER:GET_USERS/ME',
 			payload: {
 				name: result.user.name,
 				email: result.user.email,

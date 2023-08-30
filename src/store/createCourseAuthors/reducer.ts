@@ -1,21 +1,21 @@
-import { CreateCourseAuthorsActionTypes } from './types';
+import { createAction, createReducer } from '@reduxjs/toolkit';
+import { AuthType } from './types';
 
-export const authorsInitialState = [];
+export const authorsInitialState: AuthType[] = [];
 
-export const createCourseAuthorsReducer = (
-	state = authorsInitialState,
-	action: CreateCourseAuthorsActionTypes
-) => {
-	switch (action.type) {
-		case 'SAVE_COURSE_AUTHORS':
-			return action.payload;
-		case 'ADD_COURSE_AUTHOR':
-			return [...state, action.payload];
-		case 'DELETE_COURSE_AUTHOR':
-			return state.filter((item) => item.id !== action.payload);
-		case 'DELETE_COURSE_AUTHORS':
-			return authorsInitialState;
-		default:
-			return state;
-	}
-};
+const saveAuthors = createAction<AuthType[]>('COURSE_FORM:SAVE_COURSE_AUTHORS');
+const addAuthor = createAction<AuthType>('COURSE_FORM:ADD_COURSE_AUTHOR');
+const deleteAuthor = createAction<string>('COURSE_FORM:DELETE_COURSE_AUTHOR');
+const deleteAuthors = createAction<string>('COURSE_FORM:DELETE_COURSE_AUTHORS');
+
+export const createCourseAuthorsReducer = createReducer(
+	authorsInitialState,
+	(builder) =>
+		builder
+			.addCase(saveAuthors, (state, action) => action.payload)
+			.addCase(addAuthor, (state, action) => [...state, action.payload])
+			.addCase(deleteAuthor, (state, action) =>
+				state.filter((item) => item.id !== action.payload)
+			)
+			.addCase(deleteAuthors, () => authorsInitialState)
+);

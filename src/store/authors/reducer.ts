@@ -1,19 +1,19 @@
-import { AuthorsActionTypes } from './types';
+import { createAction, createReducer } from '@reduxjs/toolkit';
+import { AuthType } from './types';
 
-export const authorsInitialState = [];
+export const authorsInitialState: AuthType[] = [];
 
-export const authorsReducer = (
-	state = authorsInitialState,
-	action: AuthorsActionTypes
-) => {
-	switch (action.type) {
-		case 'SAVE_AUTHORS':
-			return action.payload;
-		case 'ADD_AUTHOR':
-			return [...state, action.payload];
-		case 'DELETE_AUTHOR':
-			return state.filter((item) => item.id !== action.payload);
-		default:
-			return state;
-	}
-};
+const loadAuthors = createAction<AuthType[]>('AUTHORS_LIST:GET_AUTHORS/ALL');
+const saveAuthors = createAction<AuthType[]>('AUTHORS_LIST:SAVE_AUTHORS');
+const addAuthor = createAction<AuthType>('AUTHORS_LIST:ADD_AUTHOR');
+const deleteAuthors = createAction<string>('AUTHORS_LIST:DELETE_AUTHOR');
+
+export const authorsReducer = createReducer(authorsInitialState, (builder) =>
+	builder
+		.addCase(loadAuthors, (state, action) => action.payload)
+		.addCase(saveAuthors, (state, action) => action.payload)
+		.addCase(addAuthor, (state, action) => [...state, action.payload])
+		.addCase(deleteAuthors, (state, action) =>
+			state.filter((item) => item.id !== action.payload)
+		)
+);
