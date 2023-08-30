@@ -11,11 +11,11 @@ export const fetchCoursesAndAuthorsByThunk = () => {
 		const authorsFromServer = await getAuthors();
 
 		dispatch({
-			type: 'THUNK_SAVE_COURSES',
+			type: 'COUSES_LIST:GET_COURSES/ALL',
 			payload: coursesFromServer,
 		});
 		dispatch({
-			type: 'THUNK_SAVE_AUTHORS',
+			type: 'AUTHORS_LIST:GET_AUTHORS/ALL',
 			payload: authorsFromServer,
 		});
 	};

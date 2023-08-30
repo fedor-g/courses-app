@@ -25,7 +25,7 @@ export const Header = () => {
 		logout(localStorage.getItem('token'));
 		localStorage.setItem('token', '');
 		localStorage.setItem('userRole', '');
-		dispatch({ type: 'DELETE_USER', payload: user.email });
+		dispatch({ type: 'CURRENT_USER:DELETE_USER', payload: user.email });
 		navigate('/login', { replace: true });
 	}
 

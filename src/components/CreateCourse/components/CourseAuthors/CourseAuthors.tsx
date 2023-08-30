@@ -13,10 +13,10 @@ export const CourseAuthors = (props) => {
 	function removeAuthoursFromCourse(id: string, name: string) {
 		const author = { id: id, name: name };
 		dispatch({
-			type: 'DELETE_COURSE_AUTHOR',
+			type: 'COURSE_FORM:DELETE_COURSE_AUTHOR',
 			payload: id,
 		});
-		dispatch({ type: 'CC_ADD_AUTHOR', payload: author });
+		dispatch({ type: 'COURSE_FORM:ADD_AUTHOR', payload: author });
 	}
 
 	return (

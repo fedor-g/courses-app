@@ -47,7 +47,7 @@ export const CreateCourse = () => {
 		async function fetchCourses() {
 			const result = await retrieveCoursesAndAuthors();
 			dispatch({
-				type: 'CC_SAVE_AUTHORS',
+				type: 'COURSE_FORM:SAVE_AUTHORS',
 				payload: result.auths,
 			});
 		}
@@ -66,11 +66,11 @@ export const CreateCourse = () => {
 				const ccAuths = authors.filter((auth) => !courseAuths.includes(auth));
 
 				dispatch({
-					type: 'SAVE_COURSE_AUTHORS',
+					type: 'COURSE_FORM:SAVE_COURSE_AUTHORS',
 					payload: courseAuths,
 				});
 				dispatch({
-					type: 'CC_SAVE_AUTHORS',
+					type: 'COURSE_FORM:SAVE_AUTHORS',
 					payload: ccAuths,
 				});
 			}
@@ -181,17 +181,17 @@ export const CreateCourse = () => {
 		if (!request) return false;
 
 		dispatch({
-			type: 'CC_ADD_AUTHOR',
+			type: 'COURSE_FORM:ADD_AUTHOR',
 			payload: request,
 		});
 	}
 
 	function clearCourseAuthors() {
 		dispatch({
-			type: 'CC_DELETE_AUTHORS',
+			type: 'COURSE_FORM:DELETE_AUTHORS',
 		});
 		dispatch({
-			type: 'DELETE_COURSE_AUTHORS',
+			type: 'COURSE_FORM:DELETE_COURSE_AUTHORS',
 		});
 	}
 

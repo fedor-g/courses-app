@@ -19,7 +19,7 @@ export const App = () => {
 
 		localStorage.setItem('userRole', result.role);
 		dispatch({
-			type: 'ADD_USER',
+			type: 'CURRENT_USER:GET_USERS/ME',
 			payload: {
 				id: result.id,
 				name: result.name,

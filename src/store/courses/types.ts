@@ -6,9 +6,3 @@ export type CourseType = {
 	duration: number;
 	authors: string[];
 };
-
-export type CoursesActionTypes =
-	| { type: 'THUNK_SAVE_COURSES'; payload }
-	| { type: 'SAVE_COURSES'; payload }
-	| { type: 'ADD_COURSE'; payload }
-	| { type: 'DELETE_COURSE'; payload };

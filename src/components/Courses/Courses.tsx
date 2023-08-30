@@ -10,7 +10,8 @@ import {
 	useAppSelector,
 } from 'src/helpers/hooks';
 import { useDispatch } from 'react-redux';
-import { ThunkDispatch } from '@reduxjs/toolkit';
+import { Action, ThunkDispatch } from '@reduxjs/toolkit';
+import { RootState } from 'src/store/store';
 
 function getElements(courses: Array<Course>, authors: Array<Author>) {
 	if (courses.length && authors.length) {
@@ -28,7 +29,8 @@ function getElements(courses: Array<Course>, authors: Array<Author>) {
 
 export const Courses = () => {
 	const navigate = useNavigate();
-	const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
+	const dispatch =
+		useDispatch<ThunkDispatch<RootState, unknown, Action<string>>>();
 
 	useEffect(() => {
 		async function retrieveCoursesAndAuthorsNew() {
