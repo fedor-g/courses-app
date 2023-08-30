@@ -9,7 +9,7 @@ import { logout } from 'src/services';
 export const Header = () => {
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
-	const selector = useAppSelector((state) => state.user);
+	const selector = useAppSelector((state) => state.users[0]);
 	const location = useLocation();
 
 	const token = localStorage.getItem('token');

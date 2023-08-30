@@ -1,7 +1,7 @@
 import { ThunkMiddleware, configureStore } from '@reduxjs/toolkit';
 import { coursesReducer } from './courses/reducer';
 import { authorsReducer } from './authors/reducer';
-import { userReducer } from './user/reducer';
+import { usersReducer } from './user/reducer';
 import { createCourseAuthorsReducer } from './createCourseAuthors/reducer';
 import { createAuthorsReducer } from './createAuthors/reducer';
 import thunk from 'redux-thunk';
@@ -12,7 +12,7 @@ export const store = configureStore({
 		authors: authorsReducer,
 		createAuthors: createAuthorsReducer,
 		createCourseAuthors: createCourseAuthorsReducer,
-		user: userReducer,
+		users: usersReducer,
 	},
 	middleware: [thunk as ThunkMiddleware],
 });
