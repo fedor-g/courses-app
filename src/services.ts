@@ -98,7 +98,7 @@ export async function getCourses(): Promise<CourseType[]> {
 	if (data.successful === false) {
 		return [];
 	}
-	console.log(data);
+
 	return data.result.map((course: CourseType) => ({
 		id: course.id,
 		title: course.title,
@@ -237,7 +237,7 @@ export async function updateCourse(
 		duration: parseInt(inputDuration),
 		authors: inputAuthors,
 	};
-
+	console.log('why am i here');
 	try {
 		response = await fetch('http://localhost:4000/courses/' + inputId, {
 			method: 'PUT',

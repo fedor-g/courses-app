@@ -18,9 +18,9 @@ import { UserType } from 'src/store/user/types';
 import { Courses } from '../Courses';
 import { server } from 'src/mocks/server';
 
-beforeAll(() => server.listen());
+beforeEach(() => server.listen());
 afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
+afterEach(() => server.close());
 
 const initialCoursesState: CourseType[] = coursesTestData;
 const initialAuthorssState: AuthType[] = authorsTestData;
@@ -46,9 +46,11 @@ const Wrapper = ({ children }) => (
 );
 
 describe('Courses', () => {
-	it('should display something please', async () => {
+	it('should display one coursecard', async () => {
 		render(<Courses />, { wrapper: Wrapper });
+
 		const items = await screen.findAllByText('testTitle');
+
 		expect(items).toHaveLength(1);
 	});
 });
