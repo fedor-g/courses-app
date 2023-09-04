@@ -237,7 +237,7 @@ export async function updateCourse(
 		duration: parseInt(inputDuration),
 		authors: inputAuthors,
 	};
-	console.log('why am i here');
+
 	try {
 		response = await fetch('http://localhost:4000/courses/' + inputId, {
 			method: 'PUT',

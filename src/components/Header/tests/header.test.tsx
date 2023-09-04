@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { userReducer } from 'src/store/user/reducer';
 import { configureStore } from '@reduxjs/toolkit';
-import { userTestData } from 'src/store/tests/data';
+import { userTestData } from 'src/common/tests/data';
 
 const store = configureStore({
 	reducer: {

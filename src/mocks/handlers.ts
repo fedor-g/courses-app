@@ -1,5 +1,5 @@
 import { rest } from 'msw';
-import { authorsTestData, coursesTestData } from 'src/store/tests/data';
+import { authorsTestData, coursesTestData } from 'src/common/tests/data';
 
 export const handlers = [
 	rest.get('http://localhost:4000/courses/all', (req, res, ctx) => {
@@ -7,7 +7,7 @@ export const handlers = [
 			ctx.status(200),
 			ctx.json({
 				successful: true,
-				result: [coursesTestData],
+				result: coursesTestData,
 			})
 		);
 	}),
@@ -17,7 +17,7 @@ export const handlers = [
 
 			ctx.json({
 				successful: true,
-				rest: [authorsTestData],
+				result: authorsTestData,
 			})
 		);
 	}),

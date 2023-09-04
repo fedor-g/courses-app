@@ -11,7 +11,7 @@ import {
 	coursesTestData,
 	authorsTestData,
 	userTestData,
-} from 'src/store/tests/data';
+} from 'src/common/tests/data';
 import { userReducer } from 'src/store/user/reducer';
 
 import { UserType } from 'src/store/user/types';
@@ -22,8 +22,6 @@ beforeEach(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterEach(() => server.close());
 
-const initialCoursesState: CourseType[] = coursesTestData;
-const initialAuthorssState: AuthType[] = authorsTestData;
 const initialuserState: UserType = userTestData;
 
 const store = configureStore({
@@ -34,8 +32,8 @@ const store = configureStore({
 	},
 	preloadedState: {
 		user: initialuserState,
-		courses: initialCoursesState,
-		authors: initialAuthorssState,
+		courses: [],
+		authors: [],
 	},
 });
 

@@ -1,6 +1,6 @@
-import { AuthType } from '../authors/types';
-import { CourseType } from '../courses/types';
-import { UserType } from '../user/types';
+import { AuthType } from '../../store/authors/types';
+import { CourseType } from '../../store/courses/types';
+import { UserType } from '../../store/user/types';
 
 export const coursesTestData: CourseType[] = [
 	{
